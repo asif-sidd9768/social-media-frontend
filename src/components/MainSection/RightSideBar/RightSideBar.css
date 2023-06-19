@@ -1,0 +1,49 @@
+.suggestions-container {
+  margin: 1rem 0.5rem 0 0;
+  max-width: 100%;
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px ;
+  border: 1px solid var(--border-color);
+}
+
+.suggestions {
+  margin: 0.5rem 0.5rem 0.6rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestions-user {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.suggestions-user-icon {
+  font-size: 1.8rem;
+}
+
+.suggestions-text {
+  margin: 0 0 0 0.5rem;
+}
+
+.suggestions-follow-btn {
+  padding: 4px 8px;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  background-color: var(--border-color);
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+.suggestions-heading {
+  font-size: 0.9rem;
+  margin: 1rem 0 0 0;
+}
+
+.suggestion-username {
+  opacity: 0.6;
+}

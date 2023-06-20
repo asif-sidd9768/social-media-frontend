@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 import { initialStateUser, userReducer } from "../reducers/UserReducer";
-import { loginUserAction } from "../actions/userActions";
-import { loginUserService } from "../services/userService";
+import { loginUserAction, setAllUsersAction } from "../actions/userActions";
+import { getAllUsersService, loginUserService } from "../services/userService";
 
 export const UserContext = createContext()
 export const UserProvider = ({children}) => {
@@ -9,20 +9,30 @@ export const UserProvider = ({children}) => {
 
   useEffect(() => {
     async function loadUser () {
-      const creds = {username: "asif", password: "asifSiddique"}
+      const creds = {username: "asif", password: "test"}
       try {
         const {status, data} = await loginUserService(creds)
         if(status === 200){
           userDispatch(loginUserAction(data))
         }
         if(!localStorage.getItem("user")){
-          localStorage.setItem("user", JSON.stringify({token: data.encodedToken, user: data.foundUser}))
+          localStorage.setItem("user", JSON.stringify({token: data.token, user: data.user}))
         }
       }catch(error){
         console.log(error)
       }
     }
     loadUser()
+  }, [])
+
+  useEffect(() => {
+    async function loadAllUsers(){
+      const {status, data} = await getAllUsersService()
+      if(status === 200){
+        userDispatch(setAllUsersAction(data))
+      }
+    }
+    loadAllUsers()
   }, [])
 
   useEffect(() => {

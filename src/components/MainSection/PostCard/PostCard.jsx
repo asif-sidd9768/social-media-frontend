@@ -18,9 +18,9 @@ export const PostCard = (post) => {
   const isBookmarkByUser = checkBookmarkPost(post, userState?.user?.bookmarks)
   const handlePostLike = async () => {
     try {
-      const {status, data} = await postLikeService(post._id)
-      if(status === 201){
-        postDispatch(setPostAction(data.posts))
+      const {status, data} = await postLikeService(post.id)
+      if(status === 200){
+        postDispatch(setPostAction(data))
       }
     }catch(error){
       console.log(error)
@@ -29,7 +29,7 @@ export const PostCard = (post) => {
 
   const handlePostBookmark = async () => {
     try{
-      const {status, data} = await bookmarkPostService(post._id)
+      const {status, data} = await bookmarkPostService(post.id)
       if(status === 200){
         userDispatch(postBookmarkAction(data.bookmarks))
       }

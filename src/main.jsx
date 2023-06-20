@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from "react-router-dom"
 
 import App from './App.jsx'
-import { makeServer } from './server.js'
+// import { makeServer } from './server.js'
 
 import './index.css'
 import { ThemeContext, ThemeProvider } from './contexts/ThemeContext.jsx'
 import { PostContext, PostProvider } from './contexts/PostContext.jsx'
 import { UserContext, UserProvider } from './contexts/UserContext.jsx'
 
-makeServer()
+// makeServer()
 
 export {ThemeContext}
 export {PostContext}

@@ -4,19 +4,30 @@ import {ThemeContext} from "../../../contexts/ThemeContext"
 
 import "./Menu.css"
 import { toggleThemeAction } from "../../../actions/themeActions"
+import { PostContext } from "../../../contexts/PostContext"
+import { toggleExploreFeedAction } from "../../../actions/postActions"
 
 export const Menu = () => {
   const {themeState, themeDispatch} = useContext(ThemeContext)
+  const { postState, postDispatch } = useContext(PostContext)
+
+  const handleFeedTypeToggle = (type) => {
+    if((type==="explore" && postState.exploreFeed) || (type==="myfeeds" && !postState.exploreFeed)){
+      return
+    }
+    postDispatch(toggleExploreFeedAction())
+  }
+
   return (
     <div className="menu-container">
       <div className="menu-left-side">
         <span><i className="fa-solid fa-house"></i></span>
         <span>Home</span>
         <span className="feed-btn-container">
-          <span>
+          <span onClick={() => handleFeedTypeToggle("explore")} className={`${postState.exploreFeed && "active-feed-type"}`}>
             Explore
           </span>
-          <span>
+          <span onClick={() => handleFeedTypeToggle("myfeeds")} className={`${!postState.exploreFeed && "active-feed-type"}`}>
             My Feeds
           </span>
         </span>

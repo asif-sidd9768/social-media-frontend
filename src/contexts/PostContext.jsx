@@ -13,10 +13,10 @@ export const PostProvider = ({children}) => {
     async function loadPosts(){
       try{
         const {data} = await fetchPosts()
-        postDispatch(setPostAction(data.posts))
-        if(!localStorage.getItem("posts")){
-          localStorage.setItem("posts", JSON.stringify(data.posts))
-        }
+        postDispatch(setPostAction(data))
+        // if(!localStorage.getItem("posts")){
+        //   localStorage.setItem("posts", JSON.stringify(data))
+        // }
       }catch(error){
         console.log(error)
       }
@@ -24,11 +24,11 @@ export const PostProvider = ({children}) => {
     loadPosts()
   }, [])
 
-  useEffect(() => {
-    if(localStorage.getItem("posts")){
-      localStorage.setItem("posts", JSON.stringify(postState.posts))
-    }
-  }, [postState])
+  // useEffect(() => {
+  //   if(localStorage.getItem("posts")){
+  //     localStorage.setItem("posts", JSON.stringify(postState.posts))
+  //   }
+  // }, [postState])
 
   return (
     <PostContext.Provider value={{postState, postDispatch}}>

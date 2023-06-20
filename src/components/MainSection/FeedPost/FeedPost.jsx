@@ -3,7 +3,7 @@ import "./FeedPost.css"
 import { UserContext } from "../../../contexts/UserContext"
 import { feedPostService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
-import { setPostAction } from "../../../actions/postActions"
+import { addPostAction, setPostAction } from "../../../actions/postActions"
 
 export const FeedPost = () => {
   const {userState} = useContext(UserContext)
@@ -11,15 +11,13 @@ export const FeedPost = () => {
 
   const handleFeedSubmit = async (event) => {
     event.preventDefault()
-    console.log(event.target[0].value)
     try {
       const postData = {
         content: event.target[0].value
       }
       const {status, data} = await feedPostService({postData})
-      if(status === 201){
-        console.log(data)
-        postDispatch(setPostAction(data.posts))
+      if(status === 200){
+        postDispatch(addPostAction(data))
       }
     }catch(error){
       console.log(error)

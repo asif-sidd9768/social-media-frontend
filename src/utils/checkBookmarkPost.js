@@ -1,4 +1,3 @@
 export const checkBookmarkPost = (post, userBookmarks) => {
-  console.log('test=== ',userBookmarks);
-  return userBookmarks.find(({_id}) => _id === post._id)
+  return userBookmarks.find((bm) => (bm.id ?? bm._id) === post.id)
 }

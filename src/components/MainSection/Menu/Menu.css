@@ -24,14 +24,12 @@
   font-size: 0.8rem;
   font-family: 'Maven Pro', sans-serif;
   font-weight: lighter;
-}
-
-.feed-btn-container span:nth-child(1) {
-  background-color: var(--border-color);
   padding: 0.3rem 1rem;
+  cursor: pointer;
 }
 
-.feed-btn-container span:nth-child(2) {
+.active-feed-type {
+  background-color: var(--border-color);
   padding: 0.3rem 1rem;
 }
 

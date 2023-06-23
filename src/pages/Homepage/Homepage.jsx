@@ -5,8 +5,8 @@ import "./Homepage.css"
 
 export const Homepage = () => {
   return (
-    <div className="homepage-container">
-      <SideMenu />
+    <div >
+      {/* <SideMenu /> */}
       <MainSection />
     </div>
   )

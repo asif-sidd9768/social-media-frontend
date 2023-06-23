@@ -1,0 +1,17 @@
+.profile-page-container {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
+
+@media screen and (width >= 1024px) {
+  .profile-page-container {
+    grid-template-columns: 2fr 5fr;
+  } 
+}
+
+@media screen and (width >= 1280px) {
+  .profile-page-container {
+    grid-template-columns: 1fr 4fr;
+  } 
+}

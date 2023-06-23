@@ -6,7 +6,7 @@ import { RightSideBar } from "./RightSideBar/RightSideBar"
 export const MainSection = () => {
   return (
     <div>
-      <Menu />
+      {/* <Menu /> */}
       <div className="main-section">
         <Feed />
         <RightSideBar />

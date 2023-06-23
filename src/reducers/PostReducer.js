@@ -2,7 +2,11 @@ export const initialStatePost = {
   posts: [],
   exploreFeed: false,
   isLoading: true,
-  error: null
+  error: null,
+  filters: {
+    showDate: "newest",
+    showTrending: false
+  }
 }
 
 export const postReducer = (state, action) => {
@@ -17,6 +21,16 @@ export const postReducer = (state, action) => {
       return {...state, posts: [action.payload, ...state.posts.filter(({id}) => id !== action.payload.id)]}
     case "TOGGLE_EXPLORE_FEED":
       return {...state, exploreFeed: !state.exploreFeed}
-
+    case "EDIT_POST":{
+      const updatedPosts = state.posts.map(post => post.id === action.payload.id ? action.payload : post)
+      return {...state, posts: updatedPosts}
+    }
+    case "DELETE_POST": {
+      const updatedPostsAfterDelete = state.posts.filter(({id}) => id !== action.payload)
+      return {...state, posts: updatedPostsAfterDelete}
+    }
+    case "TOGGLE_FILTER" :{
+      return {...state, filters: {...state.filters, ...action.payload}}
+    }
   }
 }

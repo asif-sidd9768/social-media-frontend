@@ -2,6 +2,25 @@
   color: var(--text-primary);
   background-color: var(--background);
   transition: all .5s;
+  
+}
+
+.main-app-container {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
+
+@media screen and (width >= 1024px) {
+  .main-app-container {
+    grid-template-columns: 3fr 8fr;
+  } 
+}
+
+@media screen and (width >= 1280px) {
+  .main-app-container {
+    grid-template-columns: 1fr 4fr;
+  } 
 }
 /* button {
   color: var(--text-primary);

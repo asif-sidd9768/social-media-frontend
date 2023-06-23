@@ -3,7 +3,10 @@ export const initialStateUser = {
   user: JSON.parse(localStorage.getItem("user"))?.user || {},
   isLoading: false,
   error: null,
-  allUsers: []
+  allUsers: [],
+  feedOnUserProfile: "my",
+  isProfileEditing: false,
+  isPostEditing: false,
 }
 
 export const userReducer = (state, action) => {
@@ -24,5 +27,13 @@ export const userReducer = (state, action) => {
       const allUsers = state.allUsers.map(user => user.id === action.payload.followUser.id ? action.payload.followUser : user)
       return {...state, user: action.payload.user, allUsers}
     }
+    case "CHANGE_FEED_TYPE_PROFILE":
+      return {...state, feedOnUserProfile: action.payload}
+    case "TOGGLE_PROFILE_EDIT":
+      return {...state, isProfileEditing: !state.isProfileEditing}
+    case "UPDATE_USER_PROFILE":
+      return {...state, user:action.payload}
+    case "TOGGLE_POST_EDITING":
+      return {...state, isPostEditing: !state.isPostEditing}
   }
 }

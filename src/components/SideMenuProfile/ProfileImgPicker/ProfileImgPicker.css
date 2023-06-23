@@ -1,0 +1,22 @@
+.img-picker-container {
+  padding: 1rem;
+  background-color: rgba(20,20,20,0.8);
+}
+
+.img-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;  
+}
+
+.img-picker-img {
+  width: 100px;
+  height: 100px;
+}
+
+.img-picker-new-btn {
+  width: 80%;
+  padding: 6px;
+  margin: 1rem 0 0 0;
+  cursor: pointer;
+}

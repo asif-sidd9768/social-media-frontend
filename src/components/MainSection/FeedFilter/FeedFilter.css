@@ -1,0 +1,39 @@
+.feed-filter-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 0.5rem 0;
+}
+
+.feed-filter-text {
+  font-size: 0.8rem;
+  padding: 6px;
+  opacity: 0.7;
+}
+
+.feed-date-filter-container {
+  width: 140px;
+}
+
+.feed-date-filter {
+  outline: none;
+  width: 120px;
+  padding: 6px;
+  font-size: 1rem;
+  background: none;
+  color: var(--text-secondary);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trending-container {
+  display: flex;
+  align-items: center;
+}
+
+.trending-checkbox {
+  padding: 16px;
+  border: 3px solid var(--border-color);
+  background-color: var(--liked);
+  margin: 6px;
+  transform: scale(1.2);
+}

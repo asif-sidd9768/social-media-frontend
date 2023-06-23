@@ -19,7 +19,7 @@ export const SideMenu = () => {
       </div>
       <div className="side-menu-nav">
         <NavLink to="/" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-house"></i>Home</NavLink>
-        <NavLink to="/bookmark" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-bookmark"></i>Bookmark</NavLink>
+        <NavLink to="/bookmarks" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-bookmark"></i>Bookmarks</NavLink>
         <NavLink to="/liked" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-heart"></i>Liked</NavLink>
         <NavLink to="/friends" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-user-group"></i>Friends</NavLink>
       </div>

@@ -1,16 +1,17 @@
 import { useContext, useState } from "react"
 import "./PostCard.css"
 import { calculateTimeDiff } from "../../../utils/calculateTimeDiff"
-import { bookmarkPostService, postLikeService } from "../../../services/postService"
+import { bookmarkPostService, deletePostService, editPostService, postLikeService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
-import { setPostAction } from "../../../actions/postActions"
+import { deletePostAction, editPostAction, setPostAction } from "../../../actions/postActions"
 import { checkLikedPost } from "../../../utils/checkLikedPost"
 import { UserContext } from "../../../contexts/UserContext"
-import { postBookmarkAction } from "../../../actions/userActions"
+import { postBookmarkAction, togglePostEditingAction } from "../../../actions/userActions"
 import { checkBookmarkPost } from "../../../utils/checkBookmarkPost"
 
 export const PostCard = (post) => {
   const {postDispatch} = useContext(PostContext)
+  const [showEditBtn, setShowEditBtn] = useState(false)
   const { userState, userDispatch } = useContext(UserContext)
   const [commentShow, setCommentShow] = useState(false)
 
@@ -37,6 +38,44 @@ export const PostCard = (post) => {
       console.log(error)
     }
   }
+
+  const togglePostEdit = () => {
+    userDispatch(togglePostEditingAction())
+  }
+
+  const toggleControlBtn = () => {
+    setShowEditBtn(!showEditBtn)
+  }
+
+  const handlePostEdit = async (event) => {
+    event.preventDefault()
+    console.log(event.target[0].value)
+    const updatedPost = {
+      content: event.target[0].value
+    }
+    try{
+      const result = await editPostService(updatedPost, post.id)
+      console.log(result.data)
+      postDispatch(editPostAction(result.data))
+      togglePostEdit()
+      toggleControlBtn()
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const handlePostDelete = async () => {
+    try {
+      const {status} = await deletePostService(post.id)
+      if(status === 200){
+        postDispatch(deletePostAction(post.id))
+      }
+      toggleControlBtn()
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   return (
     <div className="post-card-container">
       <div className="post-card-header">
@@ -53,13 +92,23 @@ export const PostCard = (post) => {
           <span onClick={handlePostBookmark} className={`${isBookmarkByUser ? "post-card-liked" : ""}`}>
             <i className="fa-solid fa-bookmark"></i>
           </span>
-          <span>
-            <i className="fa-solid fa-ellipsis-vertical"></i>
+          <span  className="post-control-btn">
+            <i onClick={toggleControlBtn} className="fa-solid fa-ellipsis-vertical"></i>
+            {showEditBtn && <div className="post-btns">
+              <button onClick={togglePostEdit}>Edit</button>
+              <button onClick={handlePostDelete}>Delete</button>
+            </div>}
           </span>
         </div>
       </div>
       <div className="post-card-content">
-        <p>{post?.content?.slice(0,150)}...</p>
+        <form onSubmit={handlePostEdit}>
+          <textarea type="text" className={`profile-${userState.isPostEditing ? "is" : "not"}-editing-text`} defaultValue={`${post?.content?.length < 150 ? post?.content?.slice(0,150) : `${post?.content?.slice(0,150)}...`}`} readOnly={!userState?.isPostEditing}/>
+          {/* <textarea/><p>{post?.content?.slice(0,150)}...</p> */}
+          {userState?.isPostEditing && <div className="post-card-edit-save">
+            <button>Save</button>
+          </div>}
+        </form>
       </div>
       <div className="post-card-bottom-btns">
         <span onClick={handlePostLike} className={`${isLikedByUser ? "post-card-liked" : ""}`}>

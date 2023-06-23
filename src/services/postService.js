@@ -27,3 +27,13 @@ export const bookmarkPostService = async (postId) => {
   const response = await axios.post(`${BASE_URL}/api/user/bookmark/${postId}`, {}, config)
   return response
 }
+
+export const editPostService = async (postData, postId) => {
+  const response = await axios.post(`${BASE_URL}/api/posts/edit/${postId}`, {postData}, config)
+  return response
+}
+
+export const deletePostService = async (postId) => {
+  const response = await axios.delete(`${BASE_URL}/api/posts/${postId}`,config)
+  return response
+}

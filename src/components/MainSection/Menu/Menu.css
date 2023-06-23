@@ -51,6 +51,8 @@
 .menu-user-profile{
   font-size: 1.5rem;
   cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
 }
 
 .menu-user-profile::after {
@@ -70,6 +72,10 @@
   border-radius: 10px;
 }
 
+.menu-home-btn {
+  text-decoration: none;
+  color: var(--text-primary);
+}
 
 /* The switch - the box around the slider */
 .switch {

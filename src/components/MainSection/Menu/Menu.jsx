@@ -6,10 +6,13 @@ import "./Menu.css"
 import { toggleThemeAction } from "../../../actions/themeActions"
 import { PostContext } from "../../../contexts/PostContext"
 import { toggleExploreFeedAction } from "../../../actions/postActions"
+import { UserContext } from "../../../contexts/UserContext"
+import { NavLink } from "react-router-dom"
 
 export const Menu = () => {
   const {themeState, themeDispatch} = useContext(ThemeContext)
   const { postState, postDispatch } = useContext(PostContext)
+  const { userState } = useContext(UserContext)
 
   const handleFeedTypeToggle = (type) => {
     if((type==="explore" && postState.exploreFeed) || (type==="myfeeds" && !postState.exploreFeed)){
@@ -21,8 +24,10 @@ export const Menu = () => {
   return (
     <div className="menu-container">
       <div className="menu-left-side">
-        <span><i className="fa-solid fa-house"></i></span>
-        <span>Home</span>
+        <NavLink to="/" className="menu-home-btn">
+          <span><i className="fa-solid fa-house"></i></span>
+          <span>Home</span>
+        </NavLink>
         <span className="feed-btn-container">
           <span onClick={() => handleFeedTypeToggle("explore")} className={`${postState.exploreFeed && "active-feed-type"}`}>
             Explore
@@ -40,10 +45,12 @@ export const Menu = () => {
           </label>
         </span>
         <span>
-          Asif S
+          {userState?.user?.firstName} {userState?.user?.lastName[0]}
         </span>
-        <span className="menu-user-profile">
-          <i className="fa-solid fa-circle-user"></i>
+        <span className="">
+          <NavLink to="/profile" className="menu-user-profile">
+            <i className="fa-solid fa-circle-user"></i>
+          </NavLink>
         </span>
       </div>
     </div>

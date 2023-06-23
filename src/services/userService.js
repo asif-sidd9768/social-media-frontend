@@ -28,3 +28,13 @@ export const unfollowUserService = async (followUserId) => {
   console.log(response)
   return response
 }
+
+export const updateUserService = async (userData) => {
+  const response = await axios.post(`${BASE_URL}/api/user/edit`, {userData}, config)
+  return response
+}
+
+export const updateUserProfileImgService = async (formData) => {
+  const response = await axios.post(`${BASE_URL}/api/user/edit/profile`, formData, config)
+  return response
+}

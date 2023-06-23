@@ -1,0 +1,182 @@
+.side-menu-profile-container {
+  min-height: 100vh;
+  /* padding: 1rem; */
+}
+
+.side-menu-profile-logo {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.side-menu-profile-user {
+  /* border: 1px solid var(--border-color); */
+  border-radius: 20px;
+  background-color: var(--bg-secondary);
+  margin: 0.5rem;
+  position: relative;
+}
+
+.profile-edit-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  background-color: var(--liked);
+  /* -webkit-background-clip: text; */
+  /* mix-blend-mode: difference; */
+  /* filter: invert(1) grayscale(1); */
+  /* -webkit-filter: invert(1) grayscale(1); */
+}
+
+.profile-bg-container {
+  position: relative;
+}
+
+.profile-bg {
+  max-width: 100%;
+  display: block;
+  border-radius: 20px 20px 0 0;
+}
+
+.profile-img {
+  max-width: 70%;
+  position: relative;
+  left: 0;
+  bottom: 50%;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 5px solid var(--border-color);
+  display: block;
+}
+
+.profile-foll-container {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.profile-followers, .profile-following{
+  padding: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.profile-followers p:nth-child(2), .profile-following p:nth-child(2){
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.profile-details {
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  top: -30px;
+}
+
+.profile-not-editing-text {
+  outline: none;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.profile-is-editing-text{
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+  border: none;
+}
+
+
+.profile-is-editing-text {
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--text-primary);
+}
+
+.profile-is-editing-text::placeholder{
+  font-size: 0.85rem;
+  padding: 0 0 0 0.5rem;
+  color: var(--text-primary);
+  font-family: 'Nanum Gothic';
+  font-weight: 300;
+}
+
+.profile-details textarea {
+  resize: none;
+}
+
+.profile-name {
+  padding: 0 0 6px 0;
+}
+
+.profile-username{
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.profile-bio {
+  font-size: 0.85rem;
+  margin: 1rem 0 0 0;
+  font-family: "Work Sans";
+  font-weight: lighter;
+  /* padding: 0.2rem; */
+  overflow: scroll;
+}
+
+.profile-url {
+  text-align: center;
+}
+
+.profile-url {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--liked);
+}
+
+.profile-url-radius {
+  border-radius: 0 0 20px 20px;
+}
+
+.profile-url a {
+  text-decoration: none;
+  font-family: 'Maven Pro';
+  color: var(--text-primary);
+}
+
+.profile-save-btn {
+  text-align: center;
+}
+
+.profile-save-btn button {
+  margin: 0.7rem 0.5rem 0.5rem 0.5rem ;
+  padding: 4px 12px;
+  background-color: var(--border-color);
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.profile-save-btn button:hover {
+
+}
+
+.profile-img-container {
+  position: relative;
+}
+
+.profile-picker {
+  position: absolute;
+  top: -100px;
+  z-index: 1;
+}

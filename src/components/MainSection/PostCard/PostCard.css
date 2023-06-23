@@ -113,6 +113,60 @@
   box-shadow: 0 2px 0 rgba(150,150,150,0.6);
 }
 
+.post-control-btn {
+  position: relative;
+}
+
+.post-btns {
+  background-color: rgba(150,150,150,0.7);
+  position: absolute;
+  width: max-content;
+  padding: 0.3rem 0.5rem;
+  top: -75px;
+  left: 0;
+  right: 0;
+  border-radius: 8px;
+}
+
+.post-btns button {
+  display: block;
+  margin: 0.2rem 0 0.4rem 0;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-weight: lighter;
+  font-family: 'Maven Pro';
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.post-btns button:nth-child(1){
+  background-color: rgb(132, 102, 48);
+}
+
+.post-btns button:nth-child(2){
+  background-color: rgb(168, 83, 100);
+}
+
+.post-card-content textarea {
+  resize: none;
+  width: 100%;
+  text-align: start;
+}
+
+.post-card-edit-save {
+  text-align: end;
+}
+
+.post-card-edit-save button {
+  margin: 0.5rem 0;
+  padding: 6px 12px;
+  background-color: var(--border-color);
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
 /* .post-card-comment-btn::before {
   content: "";
   display: inline-block;

@@ -12,6 +12,8 @@ import { Menu } from './components/MainSection/Menu/Menu'
 import { SideMenuProfile } from './components/SideMenuProfile/SideMenuProfile'
 import { PostDetail } from './pages/PostDetail/PostDetail'
 import { RightSideBar } from './components/MainSection/RightSideBar/RightSideBar'
+import { ProtectedRoutes } from './components/ProtectedRoutes/ProtectedRoutes'
+import { LoginPage } from './pages/LoginPage/LoginPage'
 
 function App() {
   const { themeState } = useContext(ThemeContext)
@@ -32,7 +34,8 @@ function App() {
               <Route path="/" element={<Homepage />} />            
               <Route path="/bookmarks" element={<Homepage />} />
               <Route path="/liked" element={<Homepage />} />
-              <Route path="/profile/:userId" element={<ProfilePage />} />
+              <Route path="/login" element={<LoginPage/>} />
+              <Route path="/profile/:userId" element={<ProtectedRoutes><ProfilePage /></ProtectedRoutes>} />
               <Route path="/post/:postId" element={<PostDetail />} />
             </Routes>
           </div>

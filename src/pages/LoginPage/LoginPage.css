@@ -1,0 +1,139 @@
+.login-container { 
+  /* background-color: var(--border-color); */
+  padding: 2rem;
+  margin: 2rem;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.login-submit-container {
+  text-align: center;
+}
+
+.login-logo-container {
+  text-align: center;
+  margin: 0 0 1rem 0;
+}
+
+.login-logo {
+  max-width: 40%;
+  text-align: center;
+}
+
+.login-user-id-label {
+  font-size: 12px;
+  margin: 0.5rem 0;
+  color: #666666;
+  text-align: start;
+}
+
+.login-user-id-label::before {
+  content: "*";
+  color: crimson;
+}
+
+.login-user-id-input {
+  padding: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid gray;
+  width: 100%;
+  outline: none;
+  transition: 0.2s;
+  box-sizing: border-box;
+  color: var(--text-primary);
+}
+
+.error-message {
+  color: crimson;
+  font-size: 0.7rem;
+  margin: 0 0.5rem;
+}
+
+.login-user-id-input:focus {
+  border-bottom: 2px solid gray;
+}
+
+.login-submit-btn {
+  margin: 2rem auto 0.5rem auto;
+  width: 50%;
+  padding: 8px;
+  background-color: var(--bg-secondary);
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-submit-btn:hover {
+  font-size: 15px;
+  /* width: 80%; */
+  background-color: var(--liked);
+}
+.login-page-register {
+  text-align: center;
+}
+
+.login-register-btn {
+  margin: 1rem 0;
+  padding: 8px 16px;
+  border: none;
+  border-bottom: 2px solid var(--bg-dark-color) ;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* background: radial-gradient(circle, rgba(52,101,102,1) 0%, rgba(214,211,204,1) 100%);  */
+  color: var(--bg-dark-color);
+  font-size: 15px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-register-btn:hover:enabled {
+  padding: 8px 10px;
+  border: 2px solid var(--border-color);
+}
+.login-register-btn:disabled {
+  cursor:auto;
+  background-color: rgba(52,101,102, 0.4);
+  color: white;
+  border: none;
+}
+
+.login-page-register-id-text {
+  color: #777777;
+  font-size: 13px;
+  text-align: start;
+}
+
+.login-page-register-id {
+  color: teal;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.login-as-test-container {
+  text-align: center;
+}
+
+.login-as-test-btn {
+  margin: 0 auto;
+  border: 1px solid var(--bg-dark-color);
+  padding: 6px 8px;
+  background: none;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-as-test-btn i {
+  margin: 0 0 0 0.5rem;
+}
+
+.login-as-test-btn:hover{
+  background-color: var(--bg-dark-color);
+  color: beige;
+}

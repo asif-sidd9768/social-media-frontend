@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { PostContext, UserContext } from "../../main";
 
 import "./MenuBar.css"
+import { logoutAction } from "../../actions/userActions";
 
 export const MenuBar = () => {
   const { postState, postDispatch } = useContext(PostContext)
@@ -16,17 +17,13 @@ export const MenuBar = () => {
     setIsOpen(!isOpen);
   };
 
-  // const handleLogout = async () => {
-  //   cartDispatch(clearCartAction())
-  //   userDispatch(removeUserAction())
-  //   wishlistDispatch(removeWishlistItemsAction())
-  //   await localStorage.removeItem("user")
-  //   await localStorage.removeItem("wishlist")
-  //   await localStorage.removeItem("cart")
-  //   toggleMenu()
-  //   showNotification("You're logged out.", "success")
-  //   navigate("/", {replace: true})
-  // }
+  const handleLogout = async () => {
+    userDispatch(logoutAction())
+    await localStorage.removeItem("user")
+    toggleMenu()
+    // showNotification("You're logged out.", "success")
+    navigate("/", {replace: true})
+  }
 
   return (
     <div className="menubar-container">
@@ -43,7 +40,7 @@ export const MenuBar = () => {
       </div>
       <div className={`menubar-items ${isOpen ? "open" : ""}`}>
         {
-          userState.user ? <div className="menubar-item menubar-item-logout">Logout</div> 
+          userState.user ? <div onClick={handleLogout} className="menubar-item menubar-item-logout">Logout</div> 
           : <div onClick={() => {navigate("/login"); toggleMenu()}} className="menubar-item menubar-item-logout">Login</div>
         }
         {/* <div className="menubar-item">Item 2</div>

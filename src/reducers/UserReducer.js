@@ -37,5 +37,7 @@ export const userReducer = (state, action) => {
       return {...state, isPostEditing: !state.isPostEditing}
     case "JOIN_EVENT":
       return {...state, user: {...state.user, eventsJoined: [...state.user.eventsJoined, action.payload]}}
+    case "LOGOUT_USER":
+      return {...state, user:{}, token: null}
   }
 }

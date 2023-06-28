@@ -7,23 +7,20 @@ export const UserContext = createContext()
 export const UserProvider = ({children}) => {
   const [userState, userDispatch] = useReducer(userReducer, initialStateUser)
 
-  useEffect(() => {
-    async function loadUser () {
-      const creds = {username: "benclark2022", password: "test"}
-      try {
-        const {status, data} = await loginUserService(creds)
-        if(status === 200){
-          userDispatch(loginUserAction(data))
-        }
-        if(!localStorage.getItem("user")){
-          localStorage.setItem("user", JSON.stringify({token: data.token, user: data.user}))
-        }
-      }catch(error){
-        console.log(error)
+
+  async function loginUser (creds) {
+    try {
+      const {status, data} = await loginUserService(creds)
+      if(status === 200){
+        userDispatch(loginUserAction(data))
       }
+      if(!localStorage.getItem("user")){
+        localStorage.setItem("user", JSON.stringify({token: data.token, user: data.user}))
+      }
+    }catch(error){
+      console.log(error)
     }
-    loadUser()
-  }, [])
+  }
 
   useEffect(() => {
     async function loadAllUsers(){
@@ -42,7 +39,7 @@ export const UserProvider = ({children}) => {
   }, [userState])
 
   return (
-    <UserContext.Provider value={{userState, userDispatch}}>
+    <UserContext.Provider value={{userState, userDispatch, loginUser}}>
       {children}
     </UserContext.Provider>
   )

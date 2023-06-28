@@ -45,3 +45,7 @@ export const joinEventAction = (eventData) => ({
   type:"JOIN_EVENT",
   payload:eventData
 })
+
+export const logoutAction = () => ({
+  type:"LOGOUT_USER"
+})

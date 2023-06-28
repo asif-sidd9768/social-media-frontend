@@ -10,21 +10,6 @@ import { useContext, useEffect, useState } from "react"
 import { getAllEvents } from "../../services/eventService"
 import { UserContext } from "../../main"
 
-const EVENTS_DATA = [
-  {
-    id: 1,
-    name: "How to talk to anyone",
-  },
-  {
-    id: 2,
-    name: "How to build startup",
-  },
-  {
-    id: 3,
-    name: "Hiking on mountains",
-  }
-]
-
 export const SideMenu = () => {
   const [events, setEvents] = useState({eventsData: [], selectedEvent:null})
   const { userState } = useContext(UserContext)
@@ -38,7 +23,6 @@ export const SideMenu = () => {
     async function loadEvents(){
       try {
         const result = await getAllEvents()
-        console.log(result.data)
         const toSet = {
           eventsData: result.data,
           selectedEvent: result.data[0]

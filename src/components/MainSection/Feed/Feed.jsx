@@ -22,18 +22,18 @@ export const Feed = () => {
         case "my":
           return postState?.posts.filter(({username}) => username === userState?.user?.username)
         case "liked":
-          return postState?.posts?.filter(({likes}) => likes?.likedBy.some(user => user.id === userState?.user?.id))
+          return postState?.posts?.filter(({likes}) => likes?.likedBy?.some(user => user.id === userState?.user?.id))
         case "bookmarked":
-          return postState?.posts?.filter(({id}) => userState?.user?.bookmarks.some(bk => bk._id === id))
+          return postState?.posts?.filter(({id}) => userState?.user?.bookmarks?.some(bk => bk._id === id))
       }
     }
     switch(location.pathname){
       case "/bookmarks":
-        return postState?.posts?.filter(({id}) => userState?.user?.bookmarks.some(bk => bk._id === id))
+        return postState?.posts?.filter(({id}) => userState?.user?.bookmarks?.some(bk => bk._id === id))
       case "/liked":
-        return postState?.posts?.filter(({likes}) => likes?.likedBy.some(user => user.id === userState?.user?.id))
+        return postState?.posts?.filter(({likes}) => likes?.likedBy?.some(user => user.id === userState?.user?.id))
     }
-    return postState.exploreFeed ? postState?.posts : postState?.posts.filter(({username}) => (userState.user.following.some(foll => foll.username === username)) || username === userState?.user?.username)
+    return postState.exploreFeed ? postState?.posts : postState?.posts.filter(({username}) => (userState?.user?.following?.some(foll => foll.username === username)) || username === userState?.user?.username)
   }
 
   const allFeeds = getFeeds()

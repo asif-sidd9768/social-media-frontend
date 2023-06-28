@@ -38,7 +38,7 @@ export const RightSideBar = () => {
                 </span>
               </div>
               <div>
-                <button onClick={() =>  handleFollowUser(user.id, userState.user.following.some(foll => foll.id === user.id) )} className="suggestions-follow-btn">{userState.user.following.some(foll => foll.id === user.id) ? "Following" : "Follow"}</button>
+                <button onClick={() =>  handleFollowUser(user.id, userState?.user?.following?.some(foll => foll.id === user.id) )} className="suggestions-follow-btn">{userState?.user?.following?.some(foll => foll.id === user.id) ? "Following" : "Follow"}</button>
               </div>
             </div>
           )

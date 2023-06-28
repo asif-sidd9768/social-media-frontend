@@ -9,7 +9,7 @@ export const UserProvider = ({children}) => {
 
   useEffect(() => {
     async function loadUser () {
-      const creds = {username: "asif", password: "test"}
+      const creds = {username: "benclark2022", password: "test"}
       try {
         const {status, data} = await loginUserService(creds)
         if(status === 200){

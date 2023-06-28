@@ -5,11 +5,12 @@ import { RightSideBar } from "./RightSideBar/RightSideBar"
 
 export const MainSection = () => {
   return (
-    <div>
+    <div className="main-section">
       {/* <Menu /> */}
-      <div className="main-section">
-        <Feed />
-        <RightSideBar />
+      <div>
+        <div className="scroll-feeds">
+          <Feed />
+        </div>
       </div>
     </div>
   )

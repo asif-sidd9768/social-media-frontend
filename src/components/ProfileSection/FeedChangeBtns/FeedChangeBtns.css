@@ -12,3 +12,8 @@
   padding: 0.3rem 1rem;
   cursor: pointer;
 }
+
+.active-feed-type {
+  background-color: var(--border-color);
+  padding: 0.3rem 1rem;
+}

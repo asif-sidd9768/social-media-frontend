@@ -1,3 +1,16 @@
 .feed-container {
+  
+}
+.feed-list-container {
   padding: 1rem 2rem;
+}
+
+.side-menu-profile-mobile {
+  display: block;
+}
+
+@media screen and (width >= 576px) {
+  .side-menu-profile-mobile {
+    display: none;
+  }
 }

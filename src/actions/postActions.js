@@ -31,3 +31,21 @@ export const togglePostFilterAction = (filterData) => ({
   type: "TOGGLE_FILTER",
   payload: filterData
 })
+
+export const dislikePostAction = (postData) => ({
+  type:"DISLIKE_POST",
+  payload:postData
+})
+
+export const createNewPostAction = (postData) => ({
+  type:"CREATE_NEW_POST",
+  payload: postData
+})
+
+export const createNewPostSuccessAction = () => ({
+  type:"CREATE_NEW_POST_EMPTY",
+})
+
+export const updatePageAction = () => ({
+  type:"UPDATE_PAGE"
+})

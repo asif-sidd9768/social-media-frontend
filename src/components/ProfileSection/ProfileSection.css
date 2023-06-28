@@ -1,4 +1,10 @@
 .profile-section {
   display: grid;
-  grid-template-columns: 5fr 2fr;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (width >= 1024px) {
+  .profile-section {
+    grid-template-columns: 5fr 2fr;
+  }
 }

@@ -40,3 +40,8 @@ export const updateUserProfileAction = (newData) => ({
 export const togglePostEditingAction = () => ({
   type:"TOGGLE_POST_EDITING"
 })
+
+export const joinEventAction = (eventData) => ({
+  type:"JOIN_EVENT",
+  payload:eventData
+})

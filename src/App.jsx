@@ -10,6 +10,8 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import { SideMenu } from './components/SideMenu/SideMenu'
 import { Menu } from './components/MainSection/Menu/Menu'
 import { SideMenuProfile } from './components/SideMenuProfile/SideMenuProfile'
+import { PostDetail } from './pages/PostDetail/PostDetail'
+import { RightSideBar } from './components/MainSection/RightSideBar/RightSideBar'
 
 function App() {
   const { themeState } = useContext(ThemeContext)
@@ -17,20 +19,26 @@ function App() {
 
   return (
     <div className='App main-app-container' data-theme={themeState.currentTheme}>
-      <div>
-        {location.pathname === "/profile" ? <SideMenuProfile /> : <SideMenu />}
+      <div className='main-app-sidemenu'>
+        {location.pathname.includes("profile") ? <div className=''><SideMenuProfile /></div> : <div><SideMenu /></div>}
       </div>
-      <div>
-        <div>
+      <div className='app-main-section'>
+        <div className='app-menu-container'>
           <Menu/>
         </div>
-        <div>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/bookmarks" element={<Homepage />} />
-            <Route path="/liked" element={<Homepage />} />
-          </Routes>
+        <div className='app-route-section'>
+          <div>
+            <Routes>
+              <Route path="/" element={<Homepage />} />            
+              <Route path="/bookmarks" element={<Homepage />} />
+              <Route path="/liked" element={<Homepage />} />
+              <Route path="/profile/:userId" element={<ProfilePage />} />
+              <Route path="/post/:postId" element={<PostDetail />} />
+            </Routes>
+          </div>
+          <div className='app-side-bar'>
+            <RightSideBar />
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,7 @@
+.suggestions-main {
+  display: none;
+}
+
 .suggestions-container {
   margin: 1rem 0.5rem 0 0;
   max-width: 100%;
@@ -36,7 +40,7 @@
   color: var(--text-primary);
   background-color: var(--border-color);
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .suggestions-heading {
@@ -46,4 +50,18 @@
 
 .suggestion-username {
   opacity: 0.6;
+}
+
+.suggestions-user-profile {
+  width: 40px;
+  font-size: 40px;
+  border-radius: 20px;
+  margin: 0.5rem 0 0 0;
+  display: inline-block;
+}
+
+@media screen and (width >= 768px) {
+  .suggestions-main {
+    display: block
+  }
 }

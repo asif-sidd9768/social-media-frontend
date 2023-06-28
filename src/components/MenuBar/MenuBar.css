@@ -1,0 +1,339 @@
+
+.menubar-container {
+  position: fixed;
+  width: 70%;
+  margin: 0 auto;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  /* transform: translateX(-50%); */
+  text-align: center;
+  z-index: 1;
+}
+
+.menubar-container::before {
+  content: "";
+  width: 150px;
+  height: 50px;
+  left: 35%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  margin-right: -15px;
+  background-color: var(--border-color);
+  display: inline-block;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 50%;
+  position: absolute;
+}
+
+.menubar-container::after {
+  content: "";
+  width: 150px;
+  height: 50px;
+  right: 35%;
+  bottom: 1rem;
+  transform: translateX(40%);
+  margin-right: -15px;
+  background-color: var(--border-color);
+  display: inline-block;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 50%;
+  position: absolute;
+  z-index: -1;
+}
+
+
+.menubar-button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menubar-items {
+  position: absolute;
+  bottom: 60px;
+  left: 53%;
+  transform: translateX(-50%);
+  transition: transform 0.3s;
+}
+
+.menubar-items.open {
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.menubar-item {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 50px;
+  text-align: center;
+  border-radius: 25px;
+  opacity: 0;
+  transition: all 0.3s;
+  transform: translateY(50px);
+}
+
+.menubar-item-logout {
+  cursor: pointer;
+}
+
+.menubar-items.open .menubar-item {
+  opacity: 1;
+}
+
+.menubar-items.open .menubar-item:nth-child(1) {
+  transform: translateX(-45px) rotate(0deg) translateY(-70px) rotate(0deg);
+  transition-delay: 0.1s;
+}
+
+.menubar-items.open .menubar-item:nth-child(2) {
+  transform: translateX(-190px) rotate(45deg) translateY(-100px) rotate(-45deg);
+  transition-delay: 0.2s;
+}
+
+.menubar-items.open .menubar-item:nth-child(3) {
+  transform: translateX(-50px) rotate(45deg) translateY(-100px) rotate(-45deg);
+  transition-delay: 0.3s;
+}
+
+.menubar-items.open .menubar-item:nth-child(4) {
+  transform: translateX(-30%) rotate(90deg) translateY(-100px) rotate(-90deg);
+  transition-delay: 0.4s;
+}
+
+.menubar-rotating-circle {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.menubar-rotating-circle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 4px solid var(--liked);
+  border-radius: 50%;
+}
+
+.rotate::before {
+  border: 4px dashed var(--liked);
+  animation: rotateBorder 7s linear infinite;
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.menubar-logo-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: beige;
+  /* border: 5px solid teal; */
+  transition: 0.2s;
+}
+
+.menubar-logo-img:hover {
+  transform: scale(1.1);
+}
+
+.menubar-close-btn {
+  color: var(--text-color);
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+.menubar-close-btn i {
+  font-size: 50px;
+  z-index: 1;
+  margin-bottom: 0.75rem;
+  color: beige;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.menubar-profile-btn {
+  position: absolute;
+  left: 35%;
+  bottom: 0.2rem;
+  display: inline-block;
+  margin:  0 0 1rem -1rem;
+  font-size: 22px;
+  color: var(--bg-color);
+  text-decoration: none;
+}
+
+.menubar-profile-btn i{
+  color: var(--text-primary)
+}
+
+.menubar-cart-btn {
+  position: absolute;
+  right: 30%;
+  bottom: 0.2rem;
+  display: inline-block;
+  margin:  0 -1rem 1rem 0;
+  font-size: 22px;
+  color: var(--bg-color);
+  text-decoration: none;
+}
+
+.menubar-cart-btn i {
+  color: var(--text-primary)
+}
+
+.menubar-cart-link {
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.menubar-cart-btn sup {
+  text-decoration: none;
+  color: var(--bg-color);
+}
+
+.menubar-cart-count {
+  display: inline-block;
+}
+
+@media screen and (width >= 400px) {
+  .menubar-profile-btn {
+    left: 32%;
+    bottom: 0.2rem;
+    font-size: 22px;
+    margin:  0 0 1rem 0;
+  }
+  
+  .menubar-cart-btn {
+    right: 28%;
+    bottom: 0.2rem;
+    font-size: 22px;
+    margin:  0 0 1rem 0;
+  }
+}
+
+@media screen and (width >= 576px) {
+  .menubar-container::before {
+    left: 40%;
+    transform: translateX(-45%);
+  }
+  
+  .menubar-container::after {
+    right: 40%;
+    transform: translateX(40%);
+  }
+
+  .menubar-profile-btn {
+    left: 37%;
+    bottom: 0;
+    font-size: 25px;
+  }
+  
+  .menubar-cart-btn {
+    right: 34%;
+    bottom: 0;
+    font-size: 25px;
+  }
+}
+
+@media screen and (width >= 768px) {
+  .menubar-container::before {
+    content: "";
+    width: 150px;
+    height: 50px;
+    left: 40%;
+    bottom: 1rem;
+    transform: translateX(-45%);
+    margin-right: -15px;
+    display: inline-block;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 50%;
+    position: absolute;
+  }
+  
+  .menubar-container::after {
+    content: "";
+    width: 150px;
+    height: 50px;
+    right: 40%;
+    bottom: 1rem;
+    transform: translateX(40%);
+    margin-right: -15px;
+    display: inline-block;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 50%;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .menubar-profile-btn {
+    left: 39%;
+    bottom: 0;
+    font-size: 30px;
+  }
+  
+  .menubar-cart-btn {
+    right: 37%;
+    bottom: 0;
+    font-size: 30px;
+  }
+}
+
+@media screen  and (width >= 1024px){
+  .menubar-container::before {
+    content: "";
+    width: 200px;
+    height: 50px;
+    left: 40%;
+    bottom: 1rem;
+    transform: translateX(-40%);
+    margin-right: -15px;
+    display: inline-block;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 50%;
+    position: absolute;
+  }
+  
+  .menubar-container::after {
+    content: "";
+    width: 200px;
+    height: 50px;
+    right: 40%;
+    bottom: 1rem;
+    transform: translateX(33%);
+    margin-right: -15px;
+    display: inline-block;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 50%;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .menubar-profile-btn {
+    left: 41%;
+    bottom: 0;
+  }
+  
+  .menubar-cart-btn {
+    right: 39%;
+    bottom: 0;
+  }
+}

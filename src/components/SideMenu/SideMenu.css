@@ -6,7 +6,8 @@
 }
 
 .side-menu-logo {
-  max-width: 100%;
+  max-width: 80%;
+  display: inline-block;
 }
 
 .side-menu-search-container {
@@ -20,6 +21,7 @@
 }
 
 .side-menu-search-input {
+  color: var(--text-primary);
   outline: none;
   border: none;
   background: none;
@@ -28,7 +30,7 @@
 
 .side-menu-search-input::placeholder{
   font-size: 0.85rem;
-  padding: 0 0 0 0.5rem;
+  padding: 0 0 0 0;
   color: var(--text-secondary);
   font-family: 'Nanum Gothic';
   font-weight: 300;
@@ -36,8 +38,13 @@
 
 .side-menu-search-icon {
   font-size: 0.8rem;
+  margin: 0 1rem 0 0;
   font-weight: lighter;
   color: var(--text-secondary);
+}
+
+.side-menu-search-input:focus .side-menu-search-icon {
+  color: var(--text-primary);
 }
 
 .side-menu-nav {
@@ -56,6 +63,7 @@
 .side-menu-nav-item i {
   margin: 0.5rem 1rem 0.5rem 0;
   width: 25px;
+  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -94,4 +102,42 @@
 .side-menu-recent-divider {
   border-color: var(--border-color);
   margin: 0.5rem;
+}
+
+.side-menu-explore {
+  margin: 1rem 0 0 0;
+  display: block;
+}
+
+.side-menu-events-container {
+  position: relative;
+  display: none;
+}
+
+.side-menu-event-back {
+  position: absolute;
+  top: 45%;
+  left: -10px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.side-menu-event-forward {
+  position: absolute;
+  top: 45%;
+  right: -10px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+@media screen and (width >= 690px) {
+  .side-menu-explore {
+    display: none;
+  }
+}
+
+@media screen and (width >= 768px) {
+  .side-menu-events-container {
+    display: block;
+  }
 }

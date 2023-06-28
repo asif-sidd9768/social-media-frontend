@@ -22,7 +22,7 @@ export const RightSideBar = () => {
   }
 
   return (
-    <div>
+    <div className="suggestions-main">
       <p className="suggestions-heading">Suggestions For You</p>
       <div className="suggestions-container">
         {
@@ -30,7 +30,7 @@ export const RightSideBar = () => {
             <div key={user.id} className="suggestions">
               <div className="suggestions-user">
                 <span className="suggestions-user-icon">
-                  <i className="fa-solid fa-circle-user"></i>
+                  {user?.profileImg ? <img className="suggestions-user-profile" src={user?.profileImg} /> : <span className="suggestions-user-profile"><i className="fa-solid fa-circle-user"></i></span>}
                 </span>
                 <span className="suggestions-text">
                   <p>{user?.firstName} {user?.lastName[0]}</p>

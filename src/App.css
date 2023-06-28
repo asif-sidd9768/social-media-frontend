@@ -1,20 +1,66 @@
 .App {
   color: var(--text-primary);
   background-color: var(--background);
-  transition: all .5s;
-  
+  transition: all .4s;
+  width: 100%;
+  height: 100vh;
 }
 
 .main-app-container {
+  overflow: hidden;
   display: grid;
-  grid-template-columns: 2fr 5fr;
+  grid-template-columns: 1fr;
+}
+
+.main-app-sidemenu {
+  display: none;
+}
+
+.app-route-section {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.app-side-bar {
+  display: none;
+  position: sticky;
+  top: 10%;
+  height: 100vh;
+  margin: 1rem 0 0 0;
+}
+
+.app-main-section {
+  padding: 0 0 2rem 0;
+  overflow-y: scroll;
+}
+
+.app-menu-container {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 
+@media screen and (width >= 576px) {
+  .main-app-container {
+    grid-template-columns: 2fr 5fr;
+  } 
+
+  .main-app-sidemenu {
+    display: block;
+  }
+}
+
 @media screen and (width >= 1024px) {
   .main-app-container {
-    grid-template-columns: 3fr 8fr;
+    grid-template-columns: 3fr 9fr;
   } 
+  .app-route-section {
+    grid-template-columns: 7fr 3fr;
+  } 
+  .app-side-bar {
+    display: block;
+  }
 }
 
 @media screen and (width >= 1280px) {

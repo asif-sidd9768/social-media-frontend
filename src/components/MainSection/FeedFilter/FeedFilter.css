@@ -20,7 +20,8 @@
   padding: 6px;
   font-size: 1rem;
   background: none;
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  opacity: 0.8;
   border: none;
   border-bottom: 1px solid var(--border-color);
 }

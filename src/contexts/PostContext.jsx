@@ -9,10 +9,9 @@ export const PostContext = createContext()
 export const PostProvider = ({children}) => {
   const [postState, postDispatch] = useReducer(postReducer, initialStatePost)
 
-  useEffect(() => {
-    async function loadPosts(){
+  async function loadPosts(){
       try{
-        const {data} = await fetchPosts()
+        const {data} = await fetchPosts(postState?.page)
         postDispatch(setPostAction(data))
         // if(!localStorage.getItem("posts")){
         //   localStorage.setItem("posts", JSON.stringify(data))
@@ -21,6 +20,7 @@ export const PostProvider = ({children}) => {
         console.log(error)
       }
     }
+  useEffect(() => {
     loadPosts()
   }, [])
 

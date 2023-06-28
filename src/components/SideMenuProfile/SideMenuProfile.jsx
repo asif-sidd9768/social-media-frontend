@@ -2,7 +2,7 @@
 
 import profileBg from "../../assets/images/profile-bg.jpg"
 import profileImg from "../../assets/images/profile.jpg"
-import logoImg from "../../assets/images/logo-transparent.png"
+import logoImg from "../../assets/images/logo-new.png"
 import "./SideMenuProfile.css"
 import { useContext, useRef, useState } from "react"
 import { UserContext } from "../../main"

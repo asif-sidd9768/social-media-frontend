@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import "./FeedChangeBtns.css"
 import { UserContext } from "../../../main"
 import { changeFeedTypeOnProfileAction } from "../../../actions/userActions"
@@ -16,10 +16,10 @@ export const FeedChangeBtns = () => {
             My Posts
           </span>
           <span onClick={() =>handleProfileFeedChange("liked")} className={`${userState.feedOnUserProfile === "liked" && "active-feed-type"}`}>
-            Liked Posts
+            Liked
           </span>
           <span onClick={() =>handleProfileFeedChange("bookmarked")} className={`${userState.feedOnUserProfile === "bookmarked" && "active-feed-type"}`}>
-            Bookmarked Posts
+            Bookmarked
           </span>
         </span>
     </div>

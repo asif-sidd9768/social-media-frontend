@@ -8,18 +8,12 @@ import { PostContext } from "../../../contexts/PostContext"
 import { toggleExploreFeedAction } from "../../../actions/postActions"
 import { UserContext } from "../../../contexts/UserContext"
 import { NavLink } from "react-router-dom"
+import { FeedToggleBtns } from "./FeedToggleBtns/FeedToggleBtns"
 
 export const Menu = () => {
   const {themeState, themeDispatch} = useContext(ThemeContext)
   const { postState, postDispatch } = useContext(PostContext)
   const { userState } = useContext(UserContext)
-
-  const handleFeedTypeToggle = (type) => {
-    if((type==="explore" && postState.exploreFeed) || (type==="myfeeds" && !postState.exploreFeed)){
-      return
-    }
-    postDispatch(toggleExploreFeedAction())
-  }
 
   return (
     <div className="menu-container">
@@ -28,14 +22,9 @@ export const Menu = () => {
           <span><i className="fa-solid fa-house"></i></span>
           <span>Home</span>
         </NavLink>
-        <span className="feed-btn-container">
-          <span onClick={() => handleFeedTypeToggle("explore")} className={`${postState.exploreFeed && "active-feed-type"}`}>
-            Explore
-          </span>
-          <span onClick={() => handleFeedTypeToggle("myfeeds")} className={`${!postState.exploreFeed && "active-feed-type"}`}>
-            My Feeds
-          </span>
-        </span>
+        <div className="menu-explore">
+          <FeedToggleBtns />
+        </div>
       </div>
       <div className="menu-profile-container">
         <span>
@@ -48,8 +37,9 @@ export const Menu = () => {
           {userState?.user?.firstName} {userState?.user?.lastName[0]}
         </span>
         <span className="">
-          <NavLink to="/profile" className="menu-user-profile">
-            <i className="fa-solid fa-circle-user"></i>
+          <NavLink to={`/profile/${userState?.user?.id}`} className="menu-user-profile">
+            {/* <i className="fa-solid fag-circle-user"></i> */}
+            {userState?.user?.profileImg ? <img className="menu-profile-img" src={userState?.user?.profileImg} /> : <i className="fa-solid fa-circle-user"></i>}
           </NavLink>
         </span>
       </div>

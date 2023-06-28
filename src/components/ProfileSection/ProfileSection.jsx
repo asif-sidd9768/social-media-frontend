@@ -7,11 +7,8 @@ export const ProfileSection = () => {
   return (
     <div className="profile-section-container">
       {/* <Menu /> */}
-      <div className="profile-section">
+      <div className="scroll-feeds">
         <Feed />
-        <div>
-
-        </div>
       </div>
     </div>
   )

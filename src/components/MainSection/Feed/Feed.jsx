@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom"
 import { FeedChangeBtns } from "../../ProfileSection/FeedChangeBtns/FeedChangeBtns"
 import { FeedFilter } from "../FeedFilter/FeedFilter"
 import { getFilteredFeeds } from "../../../utils/getFilteredFeeds"
+import { SideMenuProfile } from "../../SideMenuProfile/SideMenuProfile"
 
 export const Feed = () => {
   const {postState} = useContext(PostContext)
@@ -40,13 +41,18 @@ export const Feed = () => {
 
   return (
     <div className="feed-container">
-      <FeedFilter />
-      {location.pathname === "/profile" ? <FeedChangeBtns /> : <FeedPost />}
-      {
-        filteredFeeds.map((post) =>
-          <PostCard key={post.id} {...post} />
-        )
-      }
+      {location.pathname === "/profile" && <div className="side-menu-profile-mobile">
+        <SideMenuProfile />
+      </div>}
+      <div className="feed-list-container">
+        <FeedFilter />
+        {location.pathname === "/profile" ? <FeedChangeBtns /> : <FeedPost />}
+        {
+          filteredFeeds.map((post) =>
+            <PostCard key={post.id} {...post} />
+          )
+        }
+      </div>
     </div>
   )
 }

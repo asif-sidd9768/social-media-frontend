@@ -1,45 +1,80 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import "./PostCard.css"
 import { calculateTimeDiff } from "../../../utils/calculateTimeDiff"
-import { bookmarkPostService, deletePostService, editPostService, postLikeService } from "../../../services/postService"
+import { bookmarkPostService, deletePostService, editPostService, postDislikeService, postLikeService, removeBookmarkPostService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
-import { deletePostAction, editPostAction, setPostAction } from "../../../actions/postActions"
+import { deletePostAction, dislikePostAction, editPostAction, setPostAction } from "../../../actions/postActions"
 import { checkLikedPost } from "../../../utils/checkLikedPost"
 import { UserContext } from "../../../contexts/UserContext"
 import { postBookmarkAction, togglePostEditingAction } from "../../../actions/userActions"
 import { checkBookmarkPost } from "../../../utils/checkBookmarkPost"
+import { NavLink, useLocation } from "react-router-dom"
 
 export const PostCard = (post) => {
   const {postDispatch} = useContext(PostContext)
   const [showEditBtn, setShowEditBtn] = useState(false)
   const { userState, userDispatch } = useContext(UserContext)
-  const [commentShow, setCommentShow] = useState(false)
+  const controlBtnRef = useRef(null);
+  const fileInputRef = useRef(null)
+  const location = useLocation()
 
   const isLikedByUser = checkLikedPost(post)
   const isBookmarkByUser = checkBookmarkPost(post, userState?.user?.bookmarks)
+
   const handlePostLike = async () => {
     try {
-      const {status, data} = await postLikeService(post.id)
-      if(status === 200){
-        postDispatch(setPostAction(data))
+      if (isLikedByUser) {
+        const { status, data } = await postDislikeService(post.id);
+        console.log(data)
+        if (status === 200) {
+          postDispatch(dislikePostAction(data));
+        }
+      } else {
+        const { status, data } = await postLikeService(post.id);
+        if (status === 200) {
+          postDispatch(setPostAction(data));
+        }
       }
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   const handlePostBookmark = async () => {
-    try{
-      const {status, data} = await bookmarkPostService(post.id)
-      if(status === 200){
-        userDispatch(postBookmarkAction(data.bookmarks))
+    try {
+      if (isBookmarkByUser) {
+        // If the post is already bookmarked, call the removeBookmarkService or API endpoint
+        const { status, data } = await removeBookmarkPostService(post.id);
+        if (status === 200) {
+          userDispatch(postBookmarkAction(data.bookmarks));
+        }
+      } else {
+        // If the post is not bookmarked, call the addBookmarkService or API endpoint
+        const { status, data } = await bookmarkPostService(post.id);
+        if (status === 200) {
+          userDispatch(postBookmarkAction(data.bookmarks));
+        }
       }
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (controlBtnRef.current && !controlBtnRef.current.contains(event.target)) {
+        setShowEditBtn(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const togglePostEdit = () => {
+    toggleControlBtn()
     userDispatch(togglePostEditingAction())
   }
 
@@ -50,21 +85,28 @@ export const PostCard = (post) => {
   const handlePostEdit = async (event) => {
     event.preventDefault()
     console.log(event.target[0].value)
-    const updatedPost = {
-      content: event.target[0].value
+    console.log(event.target[1].files[0])
+    const formData = new FormData()
+    if(event.target[1].files[0]){
+      formData.append("editedImage", event.target[1].files[0])
     }
+    formData.append("content", event.target[0].value)
+    // const updatedPost = {
+    //   content: event.target[0].value
+    // }
     try{
-      const result = await editPostService(updatedPost, post.id)
+      const result = await editPostService(formData, post.id)
       console.log(result.data)
       postDispatch(editPostAction(result.data))
       togglePostEdit()
-      toggleControlBtn()
+      setShowEditBtn(false)
     }catch(error){
       console.log(error)
     }
   }
 
   const handlePostDelete = async () => {
+    toggleControlBtn()
     try {
       const {status} = await deletePostService(post.id)
       if(status === 200){
@@ -92,7 +134,7 @@ export const PostCard = (post) => {
           <span onClick={handlePostBookmark} className={`${isBookmarkByUser ? "post-card-liked" : ""}`}>
             <i className="fa-solid fa-bookmark"></i>
           </span>
-          <span  className="post-control-btn">
+          <span ref={controlBtnRef} className="post-control-btn">
             <i onClick={toggleControlBtn} className="fa-solid fa-ellipsis-vertical"></i>
             {showEditBtn && <div className="post-btns">
               <button onClick={togglePostEdit}>Edit</button>
@@ -101,9 +143,28 @@ export const PostCard = (post) => {
           </span>
         </div>
       </div>
+      {post.image && <div className="post-card-img-container">
+        <img src={post.image} className="post-card-img" onClick={() => fileInputRef.current.click()} />
+      </div>}
+      {post.video && <div className="post-card-img-container">
+        <video src={post.video} className="post-card-img" muted autoPlay={true} loop/>
+      </div>}
       <div className="post-card-content">
         <form onSubmit={handlePostEdit}>
-          <textarea type="text" className={`profile-${userState.isPostEditing ? "is" : "not"}-editing-text`} defaultValue={`${post?.content?.length < 150 ? post?.content?.slice(0,150) : `${post?.content?.slice(0,150)}...`}`} readOnly={!userState?.isPostEditing}/>
+          {userState?.isPostEditing ? <textarea rows={3}  type="text" className="post-is-editing" defaultValue={`${post?.content}`} /> : <NavLink className={`${location.pathname.includes("post") ? "post-card-content" : "post-card-content-no-pad"}`} to={`/post/${post?.id}`}>
+            {location.pathname.includes("post") && <p>{post?.content}</p>}
+            {!location.pathname.includes("post") && <p>{post?.content?.length < 150 ? post?.content?.slice(0,150) : `${post?.content?.slice(0,150)}...`}</p>}
+          </NavLink>}
+          {
+            userState?.isPostEditing && <input
+            type="file"
+            accept="image/*,  video/*"
+            className="file-input"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            multiple
+          />
+          }
           {/* <textarea/><p>{post?.content?.slice(0,150)}...</p> */}
           {userState?.isPostEditing && <div className="post-card-edit-save">
             <button>Save</button>
@@ -115,7 +176,7 @@ export const PostCard = (post) => {
           <i className="fa-solid fa-thumbs-up"></i> {checkLikedPost(post) ? "Liked Post" : "Like Post"}  
           <strong className="post-card-like-count">{post?.likes?.likeCount}</strong>
         </span>
-        <span className={`${commentShow ? "post-card-comment-btn" :""}`} onClick={() => setCommentShow(prevState => !prevState)}>
+        <span className={`post-card-comment-btn`} onClick={() => setCommentShow(prevState => !prevState)}>
           <i className="fa-solid fa-message"></i> Comment
         </span>
         <span>
@@ -123,7 +184,7 @@ export const PostCard = (post) => {
         </span>
       </div>
       {
-        commentShow && <>
+        location.pathname.includes("post") && <>
           <div className="post-card-comments-container">
             <div className="post-card-comment">
               <span className="comment-profile">

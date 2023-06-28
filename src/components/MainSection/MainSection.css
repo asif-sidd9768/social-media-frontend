@@ -1,4 +1,14 @@
 .main-section {
-  display: grid;
-  grid-template-columns: 5fr 2fr;
+  /* display: grid;
+  grid-template-columns: 1fr; */
 }
+/* 
+.scroll-feeds {
+}
+
+@media screen and (width >= 1024px) {
+  .main-section {
+    grid-template-columns: 7fr 3fr;
+  } 
+} */
+

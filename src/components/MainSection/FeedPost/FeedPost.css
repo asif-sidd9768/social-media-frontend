@@ -57,3 +57,21 @@
   border: 1px solid var(--border-color);
   cursor: pointer;
 }
+
+.feed-post-select-img-empty {
+  display: none;
+}
+
+.feed-post-select-img {
+  display: block;
+  width: 75px;
+  height: 60px;
+  margin: 1rem 0 0 0.5rem;
+  border-radius: 8px;
+}
+
+.feed-post-profile-img {
+  max-width: 50px;
+  border-radius: 25px;
+  margin: 0.5rem 0 0 0;
+}

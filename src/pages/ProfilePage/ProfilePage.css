@@ -3,8 +3,7 @@
   grid-template-columns: 2fr 5fr;
 }
 
-
-@media screen and (width >= 1024px) {
+@media screen and (width >= 768px) {
   .profile-page-container {
     grid-template-columns: 2fr 5fr;
   } 

@@ -34,12 +34,12 @@ export const Menu = () => {
           </label>
         </span>
         <span>
-          {/* {userState?.user?.firstName} {userState?.user?.lastName[0]} */}
+          {userState?.user?.firstName} {userState?.user?.lastName[0] ?userState?.user?.lastName[0] : <p>Loading...</p> }
         </span>
         <span className="">
           <NavLink to={`/profile/${userState?.user?.id}`} className="menu-user-profile">
-            {/* <i className="fa-solid fag-circle-user"></i> */}
-            {userState?.user?.profileImg ? <img className="menu-profile-img" src={userState?.user?.profileImg} /> : <i className="fa-solid fa-circle-user"></i>}
+            {/* <i className="fa-solid fa-circle-user"></i> */}
+            {userState?.user?.profileImg ? <img className="suggestions-user-profile" src={userState?.user?.profileImg} /> : <i className="fa-solid fa-circle-user"></i>}
           </NavLink>
         </span>
       </div>

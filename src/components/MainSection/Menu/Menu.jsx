@@ -33,15 +33,15 @@ export const Menu = () => {
             <span className="slider"></span>
           </label>
         </span>
-        <span>
-          {userState?.user?.firstName} {userState?.user?.lastName ?userState?.user?.lastName[0] : <p>Loading...</p> }
-        </span>
-        <span className="">
+        {userState?.token && <span>
+          {userState?.user?.firstName} {userState?.user?.lastName[0] }
+        </span>}
+        {userState?.token && <span className="">
           <NavLink to={`/profile/${userState?.user?.id}`} className="menu-user-profile">
             {/* <i className="fa-solid fa-circle-user"></i> */}
             {userState?.user?.profileImg ? <img className="suggestions-user-profile" src={userState?.user?.profileImg} /> : <i className="fa-solid fa-circle-user"></i>}
           </NavLink>
-        </span>
+        </span>}
       </div>
     </div>
   )

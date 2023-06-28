@@ -40,7 +40,7 @@ export const MenuBar = () => {
       </div>
       <div className={`menubar-items ${isOpen ? "open" : ""}`}>
         {
-          userState.user ? <div onClick={handleLogout} className="menubar-item menubar-item-logout">Logout</div> 
+          (Object.keys(userState.user).length > 0 && userState?.user.token) ? <div onClick={handleLogout} className="menubar-item menubar-item-logout">Logout</div> 
           : <div onClick={() => {navigate("/login"); toggleMenu()}} className="menubar-item menubar-item-logout">Login</div>
         }
         {/* <div className="menubar-item">Item 2</div>

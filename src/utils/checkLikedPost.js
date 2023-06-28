@@ -1,3 +1,3 @@
-export const checkLikedPost = (post) => {
-  return post?.likes?.likedBy?.find(({id}) => id === JSON.parse(localStorage.getItem("user")).user?.id)
+export const checkLikedPost = (post, userId) => {
+  return post?.likes?.likedBy?.find(({id}) => id === userId)
 }

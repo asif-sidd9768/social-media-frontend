@@ -18,7 +18,7 @@ export const PostCard = (post) => {
   const fileInputRef = useRef(null)
   const location = useLocation()
 
-  const isLikedByUser = checkLikedPost(post)
+  const isLikedByUser = checkLikedPost(post, userState?.user?.id)
   const isBookmarkByUser = checkBookmarkPost(post, userState?.user?.bookmarks)
 
   const handlePostLike = async () => {

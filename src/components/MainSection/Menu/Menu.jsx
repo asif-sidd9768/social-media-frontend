@@ -34,7 +34,7 @@ export const Menu = () => {
           </label>
         </span>
         <span>
-          {userState?.user?.firstName} {userState?.user?.lastName[0]}
+          {/* {userState?.user?.firstName} {userState?.user?.lastName[0]} */}
         </span>
         <span className="">
           <NavLink to={`/profile/${userState?.user?.id}`} className="menu-user-profile">

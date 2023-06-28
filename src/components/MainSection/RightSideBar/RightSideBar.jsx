@@ -33,7 +33,7 @@ export const RightSideBar = () => {
                   {user?.profileImg ? <img className="suggestions-user-profile" src={user?.profileImg} /> : <span className="suggestions-user-profile"><i className="fa-solid fa-circle-user"></i></span>}
                 </span>
                 <span className="suggestions-text">
-                  <p>{user?.firstName} {user?.lastName[0]}</p>
+                  {/* <p>{user?.firstName} {user?.lastName[0]}</p> */}
                   <p className="suggestion-username">@{user?.username}</p>
                 </span>
               </div>

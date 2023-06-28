@@ -1,6 +1,6 @@
 export const initialStatePost = {
   posts: [],
-  exploreFeed: false,
+  exploreFeed: "no",
   isLoading: true,
   error: null,
   page: 1,
@@ -33,7 +33,7 @@ export const postReducer = (state, action) => {
       return {...state, posts: updatedPostAfterDislike}
     }
     case "TOGGLE_EXPLORE_FEED":
-      return {...state, exploreFeed: !state.exploreFeed}
+      return {...state, exploreFeed: action.payload}
     case "EDIT_POST":{
       const updatedPosts = state.posts.map(post => post.id === action.payload.id ? action.payload : post)
       return {...state, posts: updatedPosts}

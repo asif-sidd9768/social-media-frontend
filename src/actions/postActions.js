@@ -13,8 +13,9 @@ export const addPostAction = (postData) => ({
   payload: postData
 })
 
-export const toggleExploreFeedAction = () => ({
-  type:"TOGGLE_EXPLORE_FEED"
+export const toggleExploreFeedAction = (feedType) => ({
+  type:"TOGGLE_EXPLORE_FEED",
+  payload: feedType
 })
 
 export const editPostAction = (postData) => ({

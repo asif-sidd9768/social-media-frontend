@@ -33,7 +33,7 @@ export const Feed = () => {
       case "/liked":
         return postState?.posts?.filter(({likes}) => likes?.likedBy?.some(user => user.id === userState?.user?.id))
     }
-    return postState.exploreFeed ? postState?.posts : postState?.posts.filter(({username}) => (userState?.user?.following?.some(foll => foll.username === username)) || username === userState?.user?.username)
+    return postState.exploreFeed === "yes" ? postState?.posts : postState?.posts.filter(({username}) => (userState?.user?.following?.some(foll => foll.username === username)) || username === userState?.user?.username)
   }
 
   const allFeeds = getFeeds()

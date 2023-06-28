@@ -84,19 +84,13 @@ export const PostCard = (post) => {
 
   const handlePostEdit = async (event) => {
     event.preventDefault()
-    console.log(event.target[0].value)
-    console.log(event.target[1].files[0])
     const formData = new FormData()
     if(event.target[1].files[0]){
       formData.append("editedImage", event.target[1].files[0])
     }
     formData.append("content", event.target[0].value)
-    // const updatedPost = {
-    //   content: event.target[0].value
-    // }
     try{
       const result = await editPostService(formData, post.id)
-      console.log(result.data)
       postDispatch(editPostAction(result.data))
       togglePostEdit()
       setShowEditBtn(false)

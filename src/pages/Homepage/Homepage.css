@@ -1,4 +1,42 @@
 .homepage-container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr;
 }
+
+.homepage-right-bar {
+  display: none;
+  position: sticky;
+  top: 10%;
+  height: 100vh;
+  margin: 1rem 0 0 0;
+}
+
+.homepage-menu {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.scroll-test {
+  overflow-y: scroll;
+}
+
+@media screen and (width >= 1024px) {
+  .homepage-container {
+    grid-template-columns: 7fr 3fr;
+  } 
+
+  .homepage-right-bar {
+    display: block;
+  }
+}
+
+@media screen and (width >= 1280px) {
+}
+/* button {
+  color: var(--text-primary);
+  background-color: var(--background);
+  border: 2px var(--text-primary) solid;
+  float: right;
+  transition: all .5s;
+} */

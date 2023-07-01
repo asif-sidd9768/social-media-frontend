@@ -11,9 +11,9 @@ import { checkBookmarkPost } from "../../../utils/checkBookmarkPost"
 import { NavLink, useLocation } from "react-router-dom"
 
 export const PostCard = (post) => {
-  const {postDispatch} = useContext(PostContext)
+  const {postDispatch, handlePostLike} = useContext(PostContext)
   const [showEditBtn, setShowEditBtn] = useState(false)
-  const { userState, userDispatch } = useContext(UserContext)
+  const { userState, userDispatch, handlePostBookmark } = useContext(UserContext)
   const controlBtnRef = useRef(null);
   const fileInputRef = useRef(null)
   const location = useLocation()
@@ -21,44 +21,44 @@ export const PostCard = (post) => {
   const isLikedByUser = checkLikedPost(post, userState?.user?.id)
   const isBookmarkByUser = checkBookmarkPost(post, userState?.user?.bookmarks)
 
-  const handlePostLike = async () => {
-    try {
-      if (isLikedByUser) {
-        const { status, data } = await postDislikeService(post.id);
-        console.log(data)
-        if (status === 200) {
-          postDispatch(dislikePostAction(data));
-        }
-      } else {
-        const { status, data } = await postLikeService(post.id);
-        if (status === 200) {
-          postDispatch(setPostAction(data));
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handlePostLike = async () => {
+  //   try {
+  //     if (isLikedByUser) {
+  //       const { status, data } = await postDislikeService(post.id);
+  //       console.log(data)
+  //       if (status === 200) {
+  //         postDispatch(dislikePostAction(data));
+  //       }
+  //     } else {
+  //       const { status, data } = await postLikeService(post.id);
+  //       if (status === 200) {
+  //         postDispatch(setPostAction(data));
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const handlePostBookmark = async () => {
-    try {
-      if (isBookmarkByUser) {
-        // If the post is already bookmarked, call the removeBookmarkService or API endpoint
-        const { status, data } = await removeBookmarkPostService(post.id);
-        if (status === 200) {
-          userDispatch(postBookmarkAction(data.bookmarks));
-        }
-      } else {
-        // If the post is not bookmarked, call the addBookmarkService or API endpoint
-        const { status, data } = await bookmarkPostService(post.id);
-        if (status === 200) {
-          userDispatch(postBookmarkAction(data.bookmarks));
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handlePostBookmark = async () => {
+  //   try {
+  //     if (isBookmarkByUser) {
+  //       // If the post is already bookmarked, call the removeBookmarkService or API endpoint
+  //       const { status, data } = await removeBookmarkPostService(post.id);
+  //       if (status === 200) {
+  //         userDispatch(postBookmarkAction(data.bookmarks));
+  //       }
+  //     } else {
+  //       // If the post is not bookmarked, call the addBookmarkService or API endpoint
+  //       const { status, data } = await bookmarkPostService(post.id);
+  //       if (status === 200) {
+  //         userDispatch(postBookmarkAction(data.bookmarks));
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (controlBtnRef.current && !controlBtnRef.current.contains(event.target)) {
@@ -125,7 +125,7 @@ export const PostCard = (post) => {
           </span>
         </div>
         <div className="post-card-header-btns">
-          <span onClick={handlePostBookmark} className={`${isBookmarkByUser ? "post-card-liked" : ""}`}>
+          <span onClick={() => handlePostBookmark(isBookmarkByUser, post.id)} className={`${isBookmarkByUser ? "post-card-liked" : ""}`}>
             <i className="fa-solid fa-bookmark"></i>
           </span>
           <span ref={controlBtnRef} className="post-control-btn">
@@ -166,7 +166,7 @@ export const PostCard = (post) => {
         </form>
       </div>
       <div className="post-card-bottom-btns">
-        <span onClick={handlePostLike} className={`${isLikedByUser ? "post-card-liked" : ""}`}>
+        <span onClick={() => handlePostLike(isLikedByUser, post.id)} className={`${isLikedByUser ? "post-card-liked" : ""}`}>
           <i className="fa-solid fa-thumbs-up"></i> {checkLikedPost(post) ? "Liked Post" : "Like Post"}  
           <strong className="post-card-like-count">{post?.likes?.likeCount}</strong>
         </span>

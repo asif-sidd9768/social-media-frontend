@@ -2,7 +2,7 @@
 import { useContext } from 'react'
 import { Routes, Route, useLocation } from "react-router-dom"
 
-import { ThemeContext } from './main'
+import { ThemeContext, UserContext } from './main'
 
 import './App.css'
 import { Homepage } from './pages/Homepage/Homepage'
@@ -17,32 +17,25 @@ import { LoginPage } from './pages/LoginPage/LoginPage'
 
 function App() {
   const { themeState } = useContext(ThemeContext)
+  const { userState } = useContext(UserContext)
   const location = useLocation()
+  const isLoginPage = location.pathname.includes("login")
 
   return (
-    <div className='App main-app-container' data-theme={themeState.currentTheme}>
-      <div className='main-app-sidemenu'>
-        {location.pathname.includes("profile") ? <div className=''><SideMenuProfile /></div> : <div><SideMenu /></div>}
-      </div>
+    <div className={`App ${!isLoginPage && "main-app-container"}`} data-theme={themeState.currentTheme}>
+      {!isLoginPage && <div className='main-app-sidemenu'>
+        {location.pathname.includes("profile") && <div className=''><SideMenuProfile /></div>}
+        {!isLoginPage && !location.pathname.includes("profile") && <div><SideMenu /></div>}
+      </div>}
       <div className='app-main-section'>
-        <div className='app-menu-container'>
-          <Menu/>
-        </div>
-        <div className='app-route-section'>
-          <div>
-            <Routes>
-              <Route path="/" element={<Homepage />} />            
-              <Route path="/bookmarks" element={<Homepage />} />
-              <Route path="/liked" element={<Homepage />} />
-              <Route path="/login" element={<LoginPage/>} />
-              <Route path="/profile/:userId" element={<ProtectedRoutes><ProfilePage /></ProtectedRoutes>} />
-              <Route path="/post/:postId" element={<PostDetail />} />
-            </Routes>
-          </div>
-          <div className='app-side-bar'>
-            <RightSideBar />
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />            
+          <Route path="/bookmarks" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />
+          <Route path="/liked" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/profile/:userId" element={<ProtectedRoutes isSignedIn={userState?.token}><ProfilePage /></ProtectedRoutes>} />
+          <Route path="/post/:postId" element={<PostDetail />} />
+        </Routes>
       </div>
     </div>
   )

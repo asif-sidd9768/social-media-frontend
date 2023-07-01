@@ -1,0 +1,59 @@
+.graphics-container {
+  position: relative;
+  background-image: url("https://png.pngtree.com/back_origin_pic/04/48/50/84cd2a9fbc6cbd5522b2f048a56703a8.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.graphics-content {
+  height: 50%;
+  width: 70%;
+  border-radius: 20px;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.15);  
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.graphics-logo {
+  max-width: 40%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 0.5rem;
+}
+
+.graphics-divider {
+  margin: 1rem auto;
+  max-width: 40%;
+  border-color: var(--border-color);
+  border-width: 0.5px;
+}
+
+.graphics-long-text {
+  font-size: 0.9rem;
+  margin: 2rem 1rem 1rem 1rem;
+  font-family: "Source Code Pro";
+}
+
+.graphics-small-text {
+  font-family: "Work Sans";
+  font-size: 0.9rem;
+  margin: 0 2rem 0.3rem 2rem;
+  color: var(--text-primary);
+}
+
+@media screen and (width >= 1024px) {
+  .graphics-long-text{
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .graphics-long-text{
+    font-size: 1.1rem;
+  }
+}

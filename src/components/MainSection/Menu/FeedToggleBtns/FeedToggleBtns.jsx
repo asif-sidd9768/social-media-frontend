@@ -9,11 +9,7 @@ export const FeedToggleBtns = () => {
   const {postState, postDispatch} = useContext(PostContext)
 
   const handleFeedTypeToggle = (type) => {
-    // if((type==="explore" && postState.exploreFeed) || (type==="myfeeds" && !postState.exploreFeed)){
-    //   return
-    // }
     const toSet = type === "explore" ? "yes" : "no"
-    console.log(toSet)
     postDispatch(toggleExploreFeedAction(toSet))
   }
 

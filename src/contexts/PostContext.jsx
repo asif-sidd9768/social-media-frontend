@@ -1,9 +1,8 @@
 import { createContext, useEffect, useReducer } from "react";
-import axios from "axios";
 
 import { initialStatePost, postReducer } from "../reducers/PostReducer";
-import { fetchPosts } from "../services/postService";
-import { setPostAction } from "../actions/postActions";
+import { fetchPosts, postDislikeService, postLikeService } from "../services/postService";
+import { dislikePostAction, setPostAction } from "../actions/postActions";
 
 export const PostContext = createContext()
 export const PostProvider = ({children}) => {
@@ -13,9 +12,6 @@ export const PostProvider = ({children}) => {
       try{
         const {data} = await fetchPosts(postState?.page)
         postDispatch(setPostAction(data))
-        // if(!localStorage.getItem("posts")){
-        //   localStorage.setItem("posts", JSON.stringify(data))
-        // }
       }catch(error){
         console.log(error)
       }
@@ -24,14 +20,27 @@ export const PostProvider = ({children}) => {
     loadPosts()
   }, [])
 
-  // useEffect(() => {
-  //   if(localStorage.getItem("posts")){
-  //     localStorage.setItem("posts", JSON.stringify(postState.posts))
-  //   }
-  // }, [postState])
+  const handlePostLike = async (isLikedByUser, postId) => {
+    try {
+      if (isLikedByUser) {
+        const { status, data } = await postDislikeService(postId);
+        console.log(data)
+        if (status === 200) {
+          postDispatch(dislikePostAction(data));
+        }
+      } else {
+        const { status, data } = await postLikeService(postId);
+        if (status === 200) {
+          postDispatch(setPostAction(data));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <PostContext.Provider value={{postState, postDispatch}}>
+    <PostContext.Provider value={{postState, postDispatch, handlePostLike}}>
       {children}
     </PostContext.Provider>
   )

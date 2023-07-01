@@ -9,22 +9,10 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required('Required'),
 });
 
-export const LoginForm = () => {
-  const { loginUser } = useContext(UserContext)
+export const LoginForm = ({handleLogin}) => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const handleLogin = async (values, {resetForm}) => {
-    console.log('text', values)
-    try {
-      const result = await loginUser(values)
-      navigate(location?.state?.from?.pathname || "/")
-    }catch(error){
-      console.log(error)
-    }finally {
-      resetForm()
-    }
-  }
   return (
     <Formik
       initialValues={{username: '', password: ''}}

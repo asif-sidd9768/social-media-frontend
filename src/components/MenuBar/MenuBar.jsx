@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import MenuLogo from "../../assets/images/avatar1.jpg"
+import MenuLogo from "../../assets/images/logo-short.png"
 import { NavLink, useNavigate } from "react-router-dom";
 import { PostContext, UserContext } from "../../main";
 
@@ -8,7 +8,6 @@ import "./MenuBar.css"
 import { logoutAction } from "../../actions/userActions";
 
 export const MenuBar = () => {
-  const { postState, postDispatch } = useContext(PostContext)
   const { userState, userDispatch } = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
@@ -40,7 +39,7 @@ export const MenuBar = () => {
       </div>
       <div className={`menubar-items ${isOpen ? "open" : ""}`}>
         {
-          (Object.keys(userState.user).length > 0 && userState?.user.token) ? <div onClick={handleLogout} className="menubar-item menubar-item-logout">Logout</div> 
+          (userState?.token) ? <div onClick={handleLogout} className="menubar-item menubar-item-logout">Logout</div> 
           : <div onClick={() => {navigate("/login"); toggleMenu()}} className="menubar-item menubar-item-logout">Login</div>
         }
         {/* <div className="menubar-item">Item 2</div>

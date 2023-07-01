@@ -20,16 +20,16 @@ export {ProfileContext}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <UserProvider>
-        <ProfileProvider>
-          <PostProvider>
-            <Router>
+    <Router>
+      <ThemeProvider>
+        <UserProvider>
+          <ProfileProvider>
+            <PostProvider>
               <App />
-            </Router>
-          </PostProvider>
-        </ProfileProvider>
-      </UserProvider>
-    </ThemeProvider>
+            </PostProvider>
+          </ProfileProvider>
+        </UserProvider>
+      </ThemeProvider>
+    </Router>
   </React.StrictMode>,
 )

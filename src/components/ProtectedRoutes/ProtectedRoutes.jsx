@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom"
 export const ProtectedRoutes = ({isSignedIn,children}) => {
   const {userState} = useContext(UserContext)
   const location = useLocation()
-  return (Object.keys(userState?.user).length > 0 && userState?.token) ? (
+  return isSignedIn ? (
     children
   ) : (
     <Navigate to="/login" state={{from:location}} replace/>

@@ -23,10 +23,10 @@ function App() {
 
   return (
     <div className={`App ${!isLoginPage && "main-app-container"}`} data-theme={themeState.currentTheme}>
-      {!isLoginPage && <div className='main-app-sidemenu'>
+      <div className='main-app-sidemenu'>
         {location.pathname.includes("profile") && <div className=''><SideMenuProfile /></div>}
         {!isLoginPage && !location.pathname.includes("profile") && <div><SideMenu /></div>}
-      </div>}
+      </div>
       <div className='app-main-section'>
         <Routes>
           <Route path="/" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />            

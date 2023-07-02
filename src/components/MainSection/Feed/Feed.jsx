@@ -41,12 +41,12 @@ export const Feed = () => {
 
   return (
     <div className="feed-container">
-      {location.pathname === "/profile" && <div className="side-menu-profile-mobile">
+      {location.pathname.includes("profile") && <div className="side-menu-profile-mobile">
         <SideMenuProfile />
       </div>}
       <div className="feed-list-container">
         <FeedFilter />
-        {location.pathname === "/profile" ? <FeedChangeBtns /> : <FeedPost />}
+        {location.pathname.includes("profile") ? <FeedChangeBtns /> : <FeedPost />}
         {
           filteredFeeds.map((post) =>
             <PostCard key={post.id} {...post} />

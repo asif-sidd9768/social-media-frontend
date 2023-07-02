@@ -2,27 +2,28 @@
 import { useContext } from 'react'
 import { Routes, Route, useLocation } from "react-router-dom"
 
-import { ThemeContext, UserContext } from './main'
+import { NotificationContext, ThemeContext, UserContext } from './main'
 
 import './App.css'
 import { Homepage } from './pages/Homepage/Homepage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import { SideMenu } from './components/SideMenu/SideMenu'
-import { Menu } from './components/MainSection/Menu/Menu'
 import { SideMenuProfile } from './components/SideMenuProfile/SideMenuProfile'
 import { PostDetail } from './pages/PostDetail/PostDetail'
-import { RightSideBar } from './components/MainSection/RightSideBar/RightSideBar'
 import { ProtectedRoutes } from './components/ProtectedRoutes/ProtectedRoutes'
 import { LoginPage } from './pages/LoginPage/LoginPage'
+import { Notification } from './components/Notification/Notification'
 
 function App() {
   const { themeState } = useContext(ThemeContext)
   const { userState } = useContext(UserContext)
+  const { notificationState } = useContext(NotificationContext)
   const location = useLocation()
   const isLoginPage = location.pathname.includes("login")
 
   return (
     <div className={`App ${!isLoginPage && "main-app-container"}`} data-theme={themeState.currentTheme}>
+      {notificationState.notifications.length > 0 && <Notification />}
       <div className='main-app-sidemenu'>
         {location.pathname.includes("profile") && <div className=''><SideMenuProfile /></div>}
         {!isLoginPage && !location.pathname.includes("profile") && <div><SideMenu /></div>}

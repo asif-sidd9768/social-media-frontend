@@ -9,6 +9,7 @@ import { logoutAction } from "../../actions/userActions";
 
 export const MenuBar = () => {
   const { userState, userDispatch } = useContext(UserContext)
+  const { postState } = useContext(PostContext)
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
 
@@ -24,6 +25,7 @@ export const MenuBar = () => {
     navigate("/", {replace: true})
   }
 
+
   return (
     <div className="menubar-container">
       <div className="menubar-profile-btn"> 
@@ -32,7 +34,7 @@ export const MenuBar = () => {
       <div onClick={toggleMenu} className="menubar-button">
         {isOpen ? 
           <span className="menubar-close-btn"><i className="fa-solid fa-circle-xmark"></i></span> 
-          : <div className={`menubar-rotating-circle ${true ? "rotate" : ""}`}>
+          : <div className={`menubar-rotating-circle ${(userState?.isLoading || postState?.isLoading) ? "rotate" : ""}`}>
               <img src={userState?.user?.profileImg ?? MenuLogo} className="menubar-logo-img" />
             </div>
           }

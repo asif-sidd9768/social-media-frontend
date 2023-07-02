@@ -7,6 +7,7 @@ export const FeedChangeBtns = () => {
   const { userState, userDispatch } = useContext(UserContext)
   
   const handleProfileFeedChange = (type) => {
+    console.log(type)
     userDispatch(changeFeedTypeOnProfileAction(type))
   }
   return (

@@ -2,7 +2,50 @@
   padding: 1rem 2rem;
 }
 
-.detai-back-btn {
+.detail-back-btn {
   margin: 0 0.3rem 0 0 ;
   cursor: pointer;
 }
+
+.detail-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.detail-right-bar {
+  display: none;
+  position: sticky;
+  top: 10%;
+  height: 100vh;
+  margin: 1rem 0 0 0;
+}
+
+.detail-menu {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.scroll-test {
+  overflow-y: scroll;
+}
+
+@media screen and (width >= 1024px) {
+  .detail-container {
+    grid-template-columns: 7fr 3fr;
+  } 
+
+  .detail-right-bar {
+    display: block;
+  }
+}
+
+@media screen and (width >= 1280px) {
+}
+/* button {
+  color: var(--text-primary);
+  background-color: var(--background);
+  border: 2px var(--text-primary) solid;
+  float: right;
+  transition: all .5s;
+} */

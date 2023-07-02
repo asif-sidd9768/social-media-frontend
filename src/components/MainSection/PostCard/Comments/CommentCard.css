@@ -1,0 +1,51 @@
+.comment-container {
+  margin: 0.5rem 0 0 0;
+}
+
+.comment-icon {
+  width: 30px;
+  font-size: 30px;
+  margin: 0 0.5rem 0 0;
+  border-radius: 20px;
+}
+
+.comment-username {
+  margin: 0 0.5rem 0 0;
+  font-size: 0.9rem;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+}
+
+.comment-content {
+  margin:  0.5rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+.comment-replying-to {
+  font-size: 0.8rem;
+}
+
+.card-circle {
+  font-size: 0.4rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.card-post-time{
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+.card-username {
+  color: var(--text-secondary);
+  margin: 0 0.5rem 0 0;
+}
+
+.post-divider {
+  margin: 1.2rem auto 0.6rem auto;
+  border-width: 0.1px;
+  border-color: var(--text-secondary);
+  width: 80%;
+}

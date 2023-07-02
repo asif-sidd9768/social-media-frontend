@@ -19,7 +19,6 @@ export const LoginFormPage = () => {
   }
 
   const handleLogin = async (values, {resetForm}) => {
-    console.log('text', values)
     try {
       const result = await loginUser(values)
     }catch(error){

@@ -3,17 +3,21 @@ import "./PostCard.css"
 import { calculateTimeDiff } from "../../../utils/calculateTimeDiff"
 import { bookmarkPostService, deletePostService, editPostService, postDislikeService, postLikeService, removeBookmarkPostService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
-import { deletePostAction, dislikePostAction, editPostAction, setPostAction } from "../../../actions/postActions"
+import { createNewComment, deletePostAction, dislikePostAction, editPostAction, postFailureAction, postLoadingAction, setPostAction } from "../../../actions/postActions"
 import { checkLikedPost } from "../../../utils/checkLikedPost"
 import { UserContext } from "../../../contexts/UserContext"
 import { postBookmarkAction, togglePostEditingAction } from "../../../actions/userActions"
 import { checkBookmarkPost } from "../../../utils/checkBookmarkPost"
 import { NavLink, useLocation } from "react-router-dom"
+import { CommentCard } from "./Comments/CommentCard"
+import { CommentPost } from "./CommentPost/CommentPost"
+import { NotificationContext } from "../../../main"
 
 export const PostCard = (post) => {
-  const {postDispatch, handlePostLike} = useContext(PostContext)
-  const [showEditBtn, setShowEditBtn] = useState(false)
+  const {postState, postDispatch, handlePostLike} = useContext(PostContext)
   const { userState, userDispatch, handlePostBookmark } = useContext(UserContext)
+  const { showNotification } = useContext(NotificationContext)
+  const [showEditBtn, setShowEditBtn] = useState(false)
   const controlBtnRef = useRef(null);
   const fileInputRef = useRef(null)
   const location = useLocation()
@@ -21,44 +25,6 @@ export const PostCard = (post) => {
   const isLikedByUser = checkLikedPost(post, userState?.user?.id)
   const isBookmarkByUser = checkBookmarkPost(post, userState?.user?.bookmarks)
 
-  // const handlePostLike = async () => {
-  //   try {
-  //     if (isLikedByUser) {
-  //       const { status, data } = await postDislikeService(post.id);
-  //       console.log(data)
-  //       if (status === 200) {
-  //         postDispatch(dislikePostAction(data));
-  //       }
-  //     } else {
-  //       const { status, data } = await postLikeService(post.id);
-  //       if (status === 200) {
-  //         postDispatch(setPostAction(data));
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handlePostBookmark = async () => {
-  //   try {
-  //     if (isBookmarkByUser) {
-  //       // If the post is already bookmarked, call the removeBookmarkService or API endpoint
-  //       const { status, data } = await removeBookmarkPostService(post.id);
-  //       if (status === 200) {
-  //         userDispatch(postBookmarkAction(data.bookmarks));
-  //       }
-  //     } else {
-  //       // If the post is not bookmarked, call the addBookmarkService or API endpoint
-  //       const { status, data } = await bookmarkPostService(post.id);
-  //       if (status === 200) {
-  //         userDispatch(postBookmarkAction(data.bookmarks));
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (controlBtnRef.current && !controlBtnRef.current.contains(event.target)) {
@@ -89,26 +55,33 @@ export const PostCard = (post) => {
       formData.append("editedImage", event.target[1].files[0])
     }
     formData.append("content", event.target[0].value)
+    postDispatch(postLoadingAction())
     try{
       const result = await editPostService(formData, post.id)
       postDispatch(editPostAction(result.data))
       togglePostEdit()
       setShowEditBtn(false)
+      showNotification("Edited a post.", "success")
     }catch(error){
-      console.log(error)
+      postDispatch(postFailureAction(error.data))
+      showNotification("Failed a post.", "error")
     }
   }
 
   const handlePostDelete = async () => {
     toggleControlBtn()
+    postDispatch(postLoadingAction())
     try {
       const {status} = await deletePostService(post.id)
       if(status === 200){
         postDispatch(deletePostAction(post.id))
       }
       toggleControlBtn()
+      showNotification("Deleted a post.", "success")
     }catch(error){
-      console.log(error)
+      console.log(error.response)
+      postDispatch(postFailureAction(error.data))
+      showNotification("Failed to delete a post.", "error")
     }
   }
 
@@ -132,7 +105,7 @@ export const PostCard = (post) => {
             <i onClick={toggleControlBtn} className="fa-solid fa-ellipsis-vertical"></i>
             {showEditBtn && <div className="post-btns">
               <button onClick={togglePostEdit}>Edit</button>
-              <button onClick={handlePostDelete}>Delete</button>
+              {(post.username === userState?.user?.username) && <button onClick={handlePostDelete}>Delete</button>}
             </div>}
           </span>
         </div>
@@ -170,7 +143,7 @@ export const PostCard = (post) => {
           <i className="fa-solid fa-thumbs-up"></i> {checkLikedPost(post) ? "Liked Post" : "Like Post"}  
           <strong className="post-card-like-count">{post?.likes?.likeCount}</strong>
         </span>
-        <span className={`post-card-comment-btn`} onClick={() => setCommentShow(prevState => !prevState)}>
+        <span className={`post-card-comment-btn`}>
           <i className="fa-solid fa-message"></i> Comment
         </span>
         <span>
@@ -180,25 +153,13 @@ export const PostCard = (post) => {
       {
         location.pathname.includes("post") && <>
           <div className="post-card-comments-container">
-            <div className="post-card-comment">
-              <span className="comment-profile">
-                <i className="fa-solid fa-circle-user"></i>
-              </span>
-              <span className="comment-text-container">
-                <span className="comment-username">Jack P:</span>
-                <span className="comment-text"> well done jackob majc is the workds person to be not here so be bo isnt' it is greatest of all.</span>
-              </span>
-            </div>
-            <div className="post-card-comment">
-              <span className="comment-profile">
-                <i className="fa-solid fa-circle-user"></i>
-              </span>
-              <span className="comment-text-container">
-                <span className="comment-username">Jack P:</span>
-                <span className="comment-text"> well done jackob majc is the workds person to be not here so be bo isnt' it is greatest of all.</span>
-              </span>
-            </div>
+            {
+              post?.comments?.map(comment => 
+                <CommentCard key={comment._id} {...comment} />   
+              )
+            }
           </div>
+          <CommentPost post={post} />
         </>
       }
     </div>

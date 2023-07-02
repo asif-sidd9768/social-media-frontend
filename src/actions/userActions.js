@@ -49,3 +49,12 @@ export const joinEventAction = (eventData) => ({
 export const logoutAction = () => ({
   type:"LOGOUT_USER"
 })
+
+export const userStateLoadingAction = () => ({
+  type:"USER_STATE_LOADING"
+})
+
+export const userStateFailureAction = (errorData) => ({
+  type:"USER_STATE_FAILURE",
+  payload: errorData
+})

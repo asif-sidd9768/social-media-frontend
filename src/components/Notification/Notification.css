@@ -1,0 +1,81 @@
+
+
+.notification-container {
+  width: max-content;
+  padding: 10px 20px 10px 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: start;
+}
+
+.notification-stack {
+  position: fixed;
+  bottom: 15%;
+  right: 2rem;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+  z-index: 4;
+}
+
+
+.notification-text-icon-success {
+  color: white;
+  padding: 6px 8px;
+  margin: 0 0.2rem 0 0;
+  background-color: rgb(134, 187, 150);
+}
+
+.notification-text-icon-error {
+  color: white;
+  padding: 6px 8px;
+  margin: 0 0.5rem 0 0;
+  background-color: rgb(170, 138, 132);
+}
+
+.notification-text-icon-info {
+  color: white;
+  padding: 6px 8px;
+  margin: 0 0.5rem 0 0;
+  background-color: rgb(214, 157, 52);
+}
+
+.notification-success {
+  background-color: rgb(91, 124, 101);
+}
+
+.notification-error {
+  background-color: rgb(139, 106, 100);
+}
+
+.notification-info {
+  background-color: rgb(172, 135, 67);
+}
+
+.notification-login-btn {
+  color: white;
+  font-size: 0.95rem;
+}
+
+.notification-text {
+  font-size: 0.85rem;
+}
+
+@media screen and (width >= 576px) {
+  .notification-login-btn {
+    color: white;
+    font-size: 1.05rem;
+  }
+  
+  .notification-text {
+    font-size: 0.95rem;
+  }
+
+  .notification-container {
+    bottom: 2rem;
+  }  
+
+  .notification-stack{
+    bottom: 2rem;
+  } 
+}

@@ -46,3 +46,8 @@ export const postDislikeService = async (postId) => {
   const response = await axios.post(`${RESOURCES.BASE_URL}/api/posts/dislike/${postId}`, {}, config)
   return response
 }
+
+export const createPostCommentService = async (postId, commentData) => {
+  const response = await axios.post(`${RESOURCES.BASE_URL}/api/posts/comment/${postId}`, {commentData}, config)
+  return response
+}

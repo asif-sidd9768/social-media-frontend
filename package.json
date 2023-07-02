@@ -16,6 +16,7 @@
     "dayjs": "^1.11.8",
     "dotenv": "^16.3.0",
     "dotenv-webpack": "^8.0.1",
+    "emoji-picker-react": "^4.4.9",
     "formik": "^2.4.2",
     "jwt-decode": "^3.1.2",
     "jwt-encode": "^1.0.1",

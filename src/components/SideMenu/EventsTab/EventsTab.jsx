@@ -1,20 +1,25 @@
 import { useContext } from "react"
 import { joinEventService } from "../../../services/eventService"
 import "./EventsTab.css"
-import { UserContext } from "../../../main"
+import { NotificationContext, UserContext } from "../../../main"
 import { checkEventJoined } from "../../../utils/checkEventJoined"
-import { joinEventAction, updateUserProfileAction } from "../../../actions/userActions"
+import { joinEventAction, updateUserProfileAction, userStateFailureAction, userStateLoadingAction } from "../../../actions/userActions"
 
 export const EventsTab = ({id, name, image,events}) => {
   const { userState, userDispatch } = useContext(UserContext)
+  const { showNotification } = useContext(NotificationContext)
   
   const isEventJoined = checkEventJoined(userState?.user?.eventsJoined, id)
   const handleEventJoin = async () => {
+    userDispatch(userStateLoadingAction())
     try {
       const result = await joinEventService(id, userState?.user?.id)
       userDispatch(updateUserProfileAction(result.data))
+      showNotification("Joined an event.", "success")
     }catch(error){
       console.log(error)
+      userDispatch(userStateFailureAction(error.data))
+      showNotification("Failed to join.", "error")
     }
   }
 

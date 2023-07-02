@@ -50,3 +50,22 @@ export const createNewPostSuccessAction = () => ({
 export const updatePageAction = () => ({
   type:"UPDATE_PAGE"
 })
+
+export const toggleEmojiPickerAction = (value) => ({
+  type:"TOGGLE_EMOJI_PICKER",
+  payload:value
+})
+
+export const createNewComment = (commentData) => ({
+  type:"CREATE_NEW_COMMENT",
+  payload: commentData
+})
+
+export const postLoadingAction = () => ({
+  type:"POST_LOADING_STATE"
+})
+
+export const postFailureAction = (errorData) => ({
+  type:"POST_LOADING_FAILURE",
+  payload: errorData
+})

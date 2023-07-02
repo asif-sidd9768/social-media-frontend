@@ -17,7 +17,7 @@ export const Feed = () => {
   const location = useLocation()
 
   const getFeeds = () => {
-    if(location.pathname === "/profile"){
+    if(location.pathname.includes("profile")){
       switch(userState.feedOnUserProfile){
         case "my":
           return postState?.posts.filter(({username}) => username === userState?.user?.username)

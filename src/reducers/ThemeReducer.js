@@ -1,5 +1,6 @@
 export const initialStateTheme = {
-  currentTheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+  currentTheme: localStorage.getItem("currentTheme") || "dark",
+  // currentTheme: localStorage.getItem("currentTheme") || window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
 }
 
 export const themeReducer = (state, action) => {

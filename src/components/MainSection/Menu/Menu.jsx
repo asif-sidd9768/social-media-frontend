@@ -7,24 +7,24 @@ import { toggleThemeAction } from "../../../actions/themeActions"
 import { PostContext } from "../../../contexts/PostContext"
 import { toggleExploreFeedAction } from "../../../actions/postActions"
 import { UserContext } from "../../../contexts/UserContext"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import { FeedToggleBtns } from "./FeedToggleBtns/FeedToggleBtns"
 
 export const Menu = () => {
   const {themeState, themeDispatch} = useContext(ThemeContext)
-  const { postState, postDispatch } = useContext(PostContext)
   const { userState } = useContext(UserContext)
+  const location = useLocation()
 
   return (
     <div className="menu-container">
       <div className="menu-left-side">
         <NavLink to="/" className="menu-home-btn">
           <span><i className="fa-solid fa-house"></i></span>
-          <span>Home</span>
+          <span className="menu-pathname">{location.pathname === "/" ? "Home" : location.pathname.split("/")[1]}</span>
         </NavLink>
-        <div className="menu-explore">
+        {!location.pathname.includes("profile") && <div className="menu-explore">
           <FeedToggleBtns />
-        </div>
+        </div>}
       </div>
       <div className="menu-profile-container">
         <span>

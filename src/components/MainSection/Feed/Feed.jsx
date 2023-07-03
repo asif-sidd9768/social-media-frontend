@@ -45,7 +45,7 @@ export const Feed = () => {
         <SideMenuProfile />
       </div>}
       <div className="feed-list-container">
-        <FeedFilter />
+        {!location.pathname.includes("profile") && <FeedFilter />}
         {location.pathname.includes("profile") ? <FeedChangeBtns /> : <FeedPost />}
         {
           filteredFeeds.map((post) =>

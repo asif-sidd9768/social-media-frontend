@@ -140,7 +140,7 @@ export const PostCard = (post) => {
       </div>
       <div className="post-card-bottom-btns">
         <span onClick={() => handlePostLike(isLikedByUser, post.id)} className={`${isLikedByUser ? "post-card-liked" : ""}`}>
-          <i className="fa-solid fa-thumbs-up"></i> {checkLikedPost(post) ? "Liked Post" : "Like Post"}  
+          <i className="fa-solid fa-thumbs-up"></i> {isLikedByUser ? "Liked Post" : "Like Post"}  
           <strong className="post-card-like-count">{post?.likes?.likeCount}</strong>
         </span>
         <span className={`post-card-comment-btn`}>

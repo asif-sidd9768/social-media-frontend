@@ -1,5 +1,5 @@
 .side-menu-container {
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
   padding: 1rem;

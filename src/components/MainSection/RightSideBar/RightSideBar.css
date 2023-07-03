@@ -53,7 +53,7 @@
 }
 
 .suggestions-user-profile {
-  width: 40px;
+  width: 30px;
   font-size: 40px;
   border-radius: 20px;
   margin: 0.5rem 0 0 0;
@@ -63,5 +63,11 @@
 @media screen and (width >= 768px) {
   .suggestions-main {
     display: block
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .suggestions-user-profile {
+    width: 40px;
   }
 }

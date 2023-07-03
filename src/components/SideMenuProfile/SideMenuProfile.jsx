@@ -50,7 +50,7 @@ export const SideMenuProfile = () => {
           </span>
           <div className="profile-foll-container">
             <div className="profile-followers">
-              <p>1452</p>
+              <p>{userState?.user?.followers?.length}</p>
               <p>Followers</p>
             </div>
             <div className="profile-img-container">
@@ -60,7 +60,7 @@ export const SideMenuProfile = () => {
               <img src={userState?.user?.profileImg ?? profileImg} className="profile-img" onClick={toggleImagePicker} />
             </div>
             <div className="profile-following">
-              <p>124</p>
+              <p>{userState?.user?.following?.length}</p>
               <p>Following</p>
             </div>
           </div>

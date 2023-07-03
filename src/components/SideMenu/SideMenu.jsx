@@ -1,14 +1,16 @@
 
 import { NavLink } from "react-router-dom"
 
+import logoImgShort from "../../assets/images/logo-short-transparent.png"
 import logoImg from "../../assets/images/logo-new.png"
 
-import "./SideMenu.css"
 import { FeedToggleBtns } from "../MainSection/Menu/FeedToggleBtns/FeedToggleBtns"
 import { EventsTab } from "./EventsTab/EventsTab"
 import { useContext, useEffect, useState } from "react"
 import { getAllEvents } from "../../services/eventService"
 import { UserContext } from "../../main"
+
+import "./SideMenu.css"
 
 export const SideMenu = () => {
   const [events, setEvents] = useState({eventsData: [], selectedEvent:null})
@@ -58,6 +60,7 @@ export const SideMenu = () => {
   return (
     <aside className="side-menu-container">
       <img src={logoImg} className="side-menu-logo" />
+      <img src={logoImgShort} className="side-menu-logo-short" />
       <div className="side-menu-search-container">
         <span className="side-menu-search-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
         <input placeholder="Search" className="side-menu-search-input" />
@@ -66,10 +69,10 @@ export const SideMenu = () => {
         <FeedToggleBtns />
       </div>
       <div className="side-menu-nav">
-        <NavLink to="/" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-house"></i>Home</NavLink>
-        <NavLink to="/bookmarks" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-bookmark"></i>Bookmarks</NavLink>
-        <NavLink to="/liked" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-heart"></i>Liked</NavLink>
-        <NavLink to={`/profile/${userState?.user?.id}`} style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-user"></i>Profile</NavLink>
+        <NavLink to="/" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-house"></i><span className="nav-item-name">Home</span></NavLink>
+        <NavLink to="/bookmarks" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-bookmark"></i><span className="nav-item-name">Bookmarks</span></NavLink>
+        <NavLink to="/liked" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-heart"></i><span className="nav-item-name">Liked</span></NavLink>
+        <NavLink to={`/profile/${userState?.user?.id}`} style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-user"></i><span className="nav-item-name">Profile</span></NavLink>
       </div>
       <hr className="side-menu-divider" />
       <div className="side-menu-recent">

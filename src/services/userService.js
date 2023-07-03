@@ -17,6 +17,11 @@ export const loginUserService = async (credentials) => {
   return response
 }
 
+export const registerUserService = async (userData) => {
+  const response = await axios.post(`${RESOURCES.BASE_URL}/api/user/register`, userData)
+  return response
+}
+
 export const followUserService = async (followUserId) => {
   const response = await axios.post (`${RESOURCES.BASE_URL}/api/user/follow/${followUserId}`, {}, config)
   console.log(response)
@@ -35,6 +40,7 @@ export const updateUserService = async (userData) => {
 }
 
 export const updateUserProfileImgService = async (formData) => {
+  console.log(config)
   const response = await axios.post(`${RESOURCES.BASE_URL}/api/user/edit/profile`, formData, config)
   return response
 }

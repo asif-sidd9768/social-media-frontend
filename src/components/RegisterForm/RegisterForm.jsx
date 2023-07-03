@@ -3,27 +3,47 @@ import * as Yup from 'yup';
 
 
 import "../../pages/LoginPage/LoginPage.css"
-import { UserContext } from '../../main';
+import { NotificationContext, UserContext } from '../../main';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { registerUserService } from '../../services/userService';
+import { loginUserAction } from '../../actions/userActions';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Required'),
-  email: Yup.string().email('Invalid email format').required('Required'),
+  firstName: Yup.string().required('Required'),
+  lastName: Yup.string().required('Required'),
+  username: Yup.string().required('Required'),
   password: Yup.string().required('Required').min(6, 'Password must be at least 6 characters'),
   confirmPassword: Yup.string().required('Required').oneOf([Yup.ref('password')], 'Passwords must match'),
 });
 
 export const RegisterForm = () => {
   const { userState, userDispatch } = useContext(UserContext)
+  const {showNotification} = useContext(NotificationContext)
   const navigate = useNavigate()
   
   const handleUserRegister = async (values, {resetForm}) => {
+    console.log(values)
     // if(userState.isLoading){
-    //   // showNotification("Some work is in progress", "error")
+    //   showNotification("Some work is in progress", "error")
     //   return
     // }
     // // userDispatch(registerUserRequestAction())
+    try {
+      const {status, data} = await registerUserService(values)
+      // console.log(result)
+      if(status === 200){
+        userDispatch(loginUserAction(data))
+      }
+      if(!localStorage.getItem("user")){
+        localStorage.setItem("user", JSON.stringify({token: data.token, user: data.user}))
+      }
+      showNotification(`Welcome, ${data?.user?.firstName} ${data?.user?.lastName[0]} `, "success")
+      navigate(location?.state?.from?.pathname || "/")
+    }catch(error){
+      console.log(error.response.data.message)
+      showNotification(error.response.data.message ?? "Failed to Register!", "error")
+    }
     // try {
     //   const response = await registerUser(values)
     //   userDispatch(setUserAction(response.data))
@@ -44,31 +64,41 @@ export const RegisterForm = () => {
 
   return (
     <Formik
-      initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
+      initialValues={{ firstName: '', lastName: '', username: '', password: '', confirmPassword: '' }}
       validationSchema={validationSchema}
       onSubmit={handleUserRegister}
     >
       {({ errors, touched }) => (
         <Form className="login-form">
           <div>
-            <p className="login-user-id-label">Name</p>
+            <p className="login-user-id-label">First Name</p>
             <Field
               type="text"
-              name="name"
+              name="firstName"
               className="login-user-id-input"
-              placeholder="Freaky Finds"
+              placeholder="Techadelic"
             />
-            <ErrorMessage className="error-message" name="name" component="div" />
+            <ErrorMessage className="error-message" name="firstName" component="div" />
           </div>
           <div>
-            <p className="login-user-id-label">Email</p>
+            <p className="login-user-id-label">Last Name</p>
             <Field
               type="text"
-              name="email"
+              name="lastName"
               className="login-user-id-input"
-              placeholder="finds@freakyfinds.com"
+              placeholder="Project"
             />
-            <ErrorMessage className="error-message" name="email" component="div" />
+            <ErrorMessage className="error-message" name="lastName" component="div" />
+          </div>
+          <div>
+            <p className="login-user-id-label">Username</p>
+            <Field
+              type="text"
+              name="username"
+              className="login-user-id-input"
+              placeholder="techadelic"
+            />
+            <ErrorMessage className="error-message" name="username" component="div" />
           </div>
           <div >
             <p className="login-user-id-label">Password</p>

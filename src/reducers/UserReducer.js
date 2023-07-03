@@ -12,7 +12,6 @@ export const initialStateUser = {
 export const userReducer = (state, action) => {
   switch(action.type){
     case "USER_STATE_LOADING":
-      console.log('here==== ')
       return {...state, isLoading: true}
     case "USER_STATE_FAILURE":
       return {...state, error:action.payload, isLoading: false}

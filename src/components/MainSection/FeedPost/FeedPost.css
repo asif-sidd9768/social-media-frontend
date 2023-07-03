@@ -1,5 +1,6 @@
 .feed-post-container {
   padding: 1rem;
+  position: relative;
   background-color: var(--bg-secondary);
   border-radius: 10px;
   border: 1px solid var(--border-color);
@@ -80,4 +81,13 @@
 .emoji-picker {
   position: absolute;
   z-index: 1;
+}
+
+.close-btn-for-add {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  font-size: 0.7rem;
+  cursor: pointer;
 }

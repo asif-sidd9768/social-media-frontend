@@ -28,14 +28,14 @@ export const RightSideBar = () => {
     }
   }
 
-  const filteredUsers = userState?.allUsers?.filter(user => user.id !== userState?.user?.id)
+  const filteredUsers = userState?.allUsers?.filter(user => (user.id !== userState?.user?.id))
 
   return (
     <div className="suggestions-main">
       <p className="suggestions-heading">Suggestions For You</p>
       <div className="suggestions-container">
         {
-          filteredUsers.map(user => 
+          filteredUsers.slice(0,5).map(user => 
             <div key={user.id} className="suggestions">
               <div className="suggestions-user">
                 <span className="suggestions-user-icon">

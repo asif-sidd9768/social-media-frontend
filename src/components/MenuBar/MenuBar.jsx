@@ -6,10 +6,11 @@ import { PostContext, UserContext } from "../../main";
 
 import "./MenuBar.css"
 import { logoutAction } from "../../actions/userActions";
+import { addNewPostAction } from "../../actions/postActions";
 
 export const MenuBar = () => {
   const { userState, userDispatch } = useContext(UserContext)
-  const { postState } = useContext(PostContext)
+  const { postState, postDispatch } = useContext(PostContext)
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
 
@@ -20,6 +21,7 @@ export const MenuBar = () => {
   const handleLogout = async () => {
     userDispatch(logoutAction())
     await localStorage.removeItem("user")
+    await localStorage.removeItem("token")
     toggleMenu()
     // showNotification("You're logged out.", "success")
     navigate("/", {replace: true})
@@ -29,7 +31,7 @@ export const MenuBar = () => {
   return (
     <div className="menubar-container">
       <div className="menubar-profile-btn"> 
-        <NavLink to={`/profile/${userState?.user?.id}`}><i className="fa-solid fa-user"></i></NavLink>
+        <NavLink onClick={() => postDispatch(addNewPostAction(true))}><i className="fa-solid fa-square-plus"></i></NavLink>
       </div>
       <div onClick={toggleMenu} className="menubar-button">
         {isOpen ? 
@@ -49,7 +51,7 @@ export const MenuBar = () => {
         <div className="menubar-item">Item 4</div> */}
       </div>
       <div className="menubar-cart-btn">
-        <NavLink className="menubar-cart-link" to="/cart"><i className="fa-solid fa-cart-shopping"></i></NavLink>
+        <NavLink className="menubar-cart-link" to="/bookmarks"><i className="fa-solid fa-bookmark"></i></NavLink>
       </div>
     </div>
   );

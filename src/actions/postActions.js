@@ -69,3 +69,8 @@ export const postFailureAction = (errorData) => ({
   type:"POST_LOADING_FAILURE",
   payload: errorData
 })
+
+export const addNewPostAction = (value) => ({
+  type:"ADDING_NEW_POST",
+  payload:value
+})

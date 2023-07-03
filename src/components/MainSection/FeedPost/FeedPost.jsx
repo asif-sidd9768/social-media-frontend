@@ -6,7 +6,7 @@ import EmojiPicker, {
 import { UserContext } from "../../../contexts/UserContext"
 import { feedPostService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
-import { addPostAction, createNewPostAction, createNewPostSuccessAction, setPostAction, toggleEmojiPickerAction } from "../../../actions/postActions"
+import { addNewPostAction, addPostAction, createNewPostAction, createNewPostSuccessAction, setPostAction, toggleEmojiPickerAction } from "../../../actions/postActions"
 
 import "./FeedPost.css"
 
@@ -69,6 +69,7 @@ export const FeedPost = () => {
   return (
     <div className="feed-post-container">
       <form onSubmit={handleFeedSubmit}>
+        <span className="close-btn-for-add" onClick={() => postDispatch(addNewPostAction(false))}><i className="fa-solid fa-x"></i></span>
         <div className="feed-post-input-container">
           <span className="feed-post-profile">
             {userState?.user?.profileImg ? <img src={userState?.user?.profileImg} className="feed-post-profile-img" /> : <i className="fa-solid fa-circle-user"></i>}
@@ -93,7 +94,7 @@ export const FeedPost = () => {
             }
             <span className="feed-post-btn-icon" onClick={() => fileInputRef.current.click()}><i className="fa-solid fa-image"></i></span>
             {/* <span className="feed-post-btn-icon" onClick={() => fileInputRef.current.click()}><i className="fa-solid fa-video"></i></span> */}
-            <span className="feed-post-btn-icon"><i className="fa-solid fa-location-dot"></i></span>
+            {/* <span className="feed-post-btn-icon"><i className="fa-solid fa-location-dot"></i></span> */}
             <span id="emoji-picker-btn" onClick={() => postDispatch(toggleEmojiPickerAction(!postState?.showEmoji))} className="feed-post-btn-icon"><i className="fa-regular fa-face-smile" id="emoji-picker-icon"></i></span>
             {postState?.showEmoji && <div className="emoji-picker" ref={emojiPickerRef}>
               <EmojiPicker

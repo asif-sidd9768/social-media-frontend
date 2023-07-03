@@ -16,7 +16,7 @@
   width: 150px;
   height: 50px;
   left: 35%;
-  bottom: 1rem;
+  bottom: 0.5rem;
   transform: translateX(-50%);
   margin-right: -15px;
   background-color: var(--border-color);
@@ -31,7 +31,7 @@
   width: 150px;
   height: 50px;
   right: 35%;
-  bottom: 1rem;
+  bottom: 0.5rem;
   transform: translateX(40%);
   margin-right: -15px;
   background-color: var(--border-color);
@@ -172,7 +172,7 @@
 
 .menubar-profile-btn {
   position: absolute;
-  left: 35%;
+  left: 30%;
   bottom: 0.2rem;
   display: inline-block;
   margin:  0 0 1rem -1rem;
@@ -197,6 +197,7 @@
 }
 
 .menubar-cart-btn i {
+  font-size: 26px;
   color: var(--text-primary)
 }
 
@@ -242,13 +243,13 @@
   }
 
   .menubar-profile-btn {
-    left: 37%;
+    left: 34%;
     bottom: 0;
     font-size: 25px;
   }
   
   .menubar-cart-btn {
-    right: 34%;
+    right: 32%;
     bottom: 0;
     font-size: 25px;
   }
@@ -260,7 +261,7 @@
     width: 150px;
     height: 50px;
     left: 40%;
-    bottom: 1rem;
+    bottom: 0.5rem;
     transform: translateX(-45%);
     margin-right: -15px;
     display: inline-block;
@@ -274,7 +275,7 @@
     width: 150px;
     height: 50px;
     right: 40%;
-    bottom: 1rem;
+    bottom: 0.5rem;
     transform: translateX(40%);
     margin-right: -15px;
     display: inline-block;
@@ -285,15 +286,15 @@
   }
 
   .menubar-profile-btn {
-    left: 39%;
+    left: 37%;
     bottom: 0;
-    font-size: 30px;
+    font-size: 28px;
   }
   
   .menubar-cart-btn {
-    right: 37%;
+    right: 36%;
     bottom: 0;
-    font-size: 30px;
+    font-size: 28px;
   }
 }
 
@@ -303,7 +304,7 @@
     width: 200px;
     height: 50px;
     left: 40%;
-    bottom: 1rem;
+    bottom: 0.5rem;
     transform: translateX(-40%);
     margin-right: -15px;
     display: inline-block;
@@ -317,7 +318,7 @@
     width: 200px;
     height: 50px;
     right: 40%;
-    bottom: 1rem;
+    bottom: 0.5rem;
     transform: translateX(33%);
     margin-right: -15px;
     display: inline-block;
@@ -328,12 +329,12 @@
   }
 
   .menubar-profile-btn {
-    left: 41%;
+    left: 40%;
     bottom: 0;
   }
   
   .menubar-cart-btn {
-    right: 39%;
+    right: 40%;
     bottom: 0;
   }
 }

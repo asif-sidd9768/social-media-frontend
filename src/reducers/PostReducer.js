@@ -17,6 +17,7 @@ export const initialStatePost = {
   newComment: {
     content: ""
   },
+  addingPost: false,
   showEmoji: false
 }
 
@@ -64,6 +65,8 @@ export const postReducer = (state, action) => {
     case "CREATE_NEW_COMMENT": {
         return {...state, newComment: action.payload, isLoading: false}
       }
+    case "ADDING_NEW_POST":
+      return {...state, addingPost: action.payload}
     default: 
       return {...state}
   }

@@ -7,7 +7,12 @@
 
 .side-menu-logo {
   max-width: 80%;
+  display: none;
+}
+
+.side-menu-logo-short {
   display: inline-block;
+  max-width: 20%;
 }
 
 .side-menu-search-container {
@@ -130,6 +135,10 @@
   cursor: pointer;
 }
 
+/* .nav-item-name {
+  display: none;
+} */
+
 @media screen and (width >= 690px) {
   .side-menu-explore {
     display: none;
@@ -140,4 +149,18 @@
   .side-menu-events-container {
     display: block;
   }
+
+  .nav-item-name {
+    display: inline-block;
+  }
+
+  .side-menu-logo {
+    display: inline-block;
+  }
+
+  .side-menu-logo-short {
+    max-width: 80%;
+    display: none;
+  }
 }
+

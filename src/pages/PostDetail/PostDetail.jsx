@@ -7,6 +7,7 @@ import { PostCard } from "../../components/MainSection/PostCard/PostCard"
 import "./PostDetail.css"
 import { Menu } from "../../components/MainSection/Menu/Menu"
 import { MenuBar } from "../../components/MenuBar/MenuBar"
+import { RightSideBar } from "../../components/MainSection/RightSideBar/RightSideBar"
 
 export const PostDetail = () => {
   const { postState } = useContext(PostContext)
@@ -22,10 +23,11 @@ export const PostDetail = () => {
       </div>
       <div className="detail-container" >
         <div className="scroll-test">
+        <p><span className="detail-back-btn" onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left"></i></span> Posts</p>
           <PostCard {...foundPost} />
         </div>
         <div className="detail-right-bar">
-          {/* <RightSideBar /> */}
+          <RightSideBar />
         </div>      
         <MenuBar />
       </div>

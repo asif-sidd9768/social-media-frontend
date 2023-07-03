@@ -69,7 +69,7 @@ export const FeedPost = () => {
   return (
     <div className="feed-post-container">
       <form onSubmit={handleFeedSubmit}>
-        <span className="close-btn-for-add" onClick={() => postDispatch(addNewPostAction(false))}><i className="fa-solid fa-x"></i></span>
+        {postState?.addingPost && <span className="close-btn-for-add" onClick={() => postDispatch(addNewPostAction(false))}><i className="fa-solid fa-x"></i></span>}
         <div className="feed-post-input-container">
           <span className="feed-post-profile">
             {userState?.user?.profileImg ? <img src={userState?.user?.profileImg} className="feed-post-profile-img" /> : <i className="fa-solid fa-circle-user"></i>}

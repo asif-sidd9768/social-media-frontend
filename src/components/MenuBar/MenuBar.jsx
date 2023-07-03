@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import MenuLogo from "../../assets/images/logo-short.png"
+import MenuLogo from "../../assets/images/new-logo.jpeg"
 import { NavLink, useNavigate } from "react-router-dom";
 import { PostContext, UserContext } from "../../main";
 
@@ -20,8 +20,8 @@ export const MenuBar = () => {
 
   const handleLogout = async () => {
     userDispatch(logoutAction())
-    await localStorage.removeItem("user")
-    await localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
     toggleMenu()
     // showNotification("You're logged out.", "success")
     navigate("/", {replace: true})

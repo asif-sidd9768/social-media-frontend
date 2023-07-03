@@ -57,7 +57,9 @@ export const SideMenuProfile = () => {
               {showPicker && <div className="profile-picker">
                 <ProfileImgPicker toggleImagePicker={toggleImagePicker} />
               </div>}
-              <img src={userState?.user?.profileImg ?? profileImg} className="profile-img" onClick={toggleImagePicker} />
+              {userState?.user?.profileImg ? 
+                <img src={userState?.user?.profileImg} className="profile-img" onClick={toggleImagePicker} /> :
+                <i className="fa-solid fa-circle-user profile-img"></i>}
             </div>
             <div className="profile-following">
               <p>{userState?.user?.following?.length}</p>

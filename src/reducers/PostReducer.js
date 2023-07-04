@@ -14,9 +14,7 @@ export const initialStatePost = {
     content: "",
     selectedImage: null
   },
-  newComment: {
-    content: ""
-  },
+  newComment: "",
   addingPost: false,
   showEmoji: false
 }
@@ -63,10 +61,11 @@ export const postReducer = (state, action) => {
     case "TOGGLE_EMOJI_PICKER":
       return {...state, showEmoji: action.payload}
     case "CREATE_NEW_COMMENT": {
-        return {...state, newComment: action.payload, isLoading: false}
-      }
+      console.log(action.payload)
+      return {...state, newComment: action.payload, isLoading: false}
+    }
     case "ADDING_NEW_POST":
-      return {...state, addingPost: action.payload}
+      return {...state, addingPost: action.payload, isLoading: false}
     default: 
       return {...state}
   }

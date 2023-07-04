@@ -1,0 +1,30 @@
+.empty-container {
+  margin: 2rem 0 0 0;
+}
+
+.empty-main-line {
+  text-align: center;
+  font-size: 1.25rem;
+  margin: 0.2rem;
+  font-family: "Work Sans";
+}
+
+.empty-secondary-line {
+  text-align: center;
+  font-family: "Maven Pro";
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.empty-btn {
+  padding: 8px 12px;
+  border: none;
+  background-color: var(--liked);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.empty-btn-container {
+  text-align: center;
+  margin: 1rem 0 0 0;
+}

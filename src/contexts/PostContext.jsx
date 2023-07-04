@@ -4,10 +4,12 @@ import { initialStatePost, postReducer } from "../reducers/PostReducer";
 import { fetchPosts, postDislikeService, postLikeService } from "../services/postService";
 import { dislikePostAction, postFailureAction, postLoadingAction, setPostAction } from "../actions/postActions";
 import { NotificationContext } from "./NotificationContext";
+import { UserContext } from "./UserContext";
 
 export const PostContext = createContext()
 export const PostProvider = ({children}) => {
   const [postState, postDispatch] = useReducer(postReducer, initialStatePost)
+  const {userState} = useContext(UserContext)
   const {showNotification} = useContext(NotificationContext)
 
   async function loadPosts(){
@@ -19,7 +21,9 @@ export const PostProvider = ({children}) => {
       }
     }
   useEffect(() => {
-    loadPosts()
+    if(userState?.token){
+      loadPosts()
+    }
   }, [])
 
   useEffect(() => {
@@ -27,6 +31,10 @@ export const PostProvider = ({children}) => {
   }, [postState.exploreFeed])
 
   const handlePostLike = async (isLikedByUser, postId) => {
+    if(postState.isLoading){
+      showNotification("Some work is going on.", "info")
+      return 
+    }
     postDispatch(postLoadingAction())
     try {
       if (isLikedByUser) {
@@ -43,7 +51,6 @@ export const PostProvider = ({children}) => {
         }
       }
     } catch (error) {
-      console.log(error);
       postDispatch(postFailureAction(error.data))
       showNotification("Failed to like/unlike post.", "error")
     }

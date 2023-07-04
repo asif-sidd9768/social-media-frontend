@@ -16,8 +16,11 @@ export const UserProvider = ({children}) => {
 
   async function loginUser (creds) {
     userDispatch(userStateLoadingAction())
+    if(userState?.isLoading){
+      showNotification("Some work is going on.", "info")
+      return
+    }
     try {
-      console.log('creds==== ', creds)
       const {status, data} = await loginUserService(creds)
       if(status === 200){
         userDispatch(loginUserAction(data))
@@ -26,6 +29,8 @@ export const UserProvider = ({children}) => {
       if(!localStorage.getItem("user")){
         localStorage.setItem("user", JSON.stringify({token: data.token, user: data.user}))
       }
+      loadStories()
+      loadAllUsers()
       showNotification(`Welcome, ${data?.user?.firstName} ${data?.user?.lastName[0]} `, "success")
       navigate(location?.state?.from?.pathname || "/")
     }catch(error){
@@ -35,26 +40,33 @@ export const UserProvider = ({children}) => {
     }
   }
 
-  useEffect(() => {
-    async function loadAllUsers(){
-      const {status, data} = await getAllUsersService()
-      if(status === 200){
-        userDispatch(setAllUsersAction(data))
-      }
+
+  async function loadAllUsers(){
+    const {status, data} = await getAllUsersService()
+    if(status === 200){
+      userDispatch(setAllUsersAction(data))
     }
-    loadAllUsers()
+  }
+
+  async function loadStories (){
+    try{
+      const result = await getAllStoriesService()
+      userDispatch(setUserStoriesAction(result.data))
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if(userState?.token){
+      loadAllUsers()
+    }
   }, [])
 
   useEffect(() => {
-    async function loadStories (){
-      try{
-        const result = await getAllStoriesService()
-        userDispatch(setUserStoriesAction(result.data))
-      }catch(error){
-        console.log(error)
-      }
+    if(userState?.token){
+      loadStories()
     }
-    loadStories()
   },[])
 
   useEffect(() => {
@@ -65,6 +77,10 @@ export const UserProvider = ({children}) => {
 
   const handlePostBookmark = async (isBookmarkByUser, postId) => {
     userDispatch(userStateLoadingAction())
+    if(userState?.isLoading){
+      showNotification("Some work is going on.", "info")
+      return
+    }
     try {
       if (isBookmarkByUser) {
         // If the post is already bookmarked, call the removeBookmarkService or API endpoint

@@ -6,8 +6,8 @@ export const CommentCard = ({postUser, commentUser, content, createdAt, commentI
     <div className="comment-container">
       <div className="comment-header">
         <span className="comment-icon">
-          <img className="comment-icon" src={commentImage} />
-          {/* <i className="fa-solid fa-circle-user"></i>} */}
+          {commentImage ? <img className="comment-icon" src={commentImage} /> :
+          <i className="fa-solid fa-circle-user comment-icon"></i>}
         </span>
         <span className="comment-username">@{commentUser}</span>
         <span className="card-circle"><i className="fa-solid fa-circle"></i></span>

@@ -238,7 +238,7 @@
 
 @media screen and (width >= 1024px) {
   .profile-img {
-    max-width: 70%;
-    font-size: 70%;
+    max-width: 100%;
+    font-size: 70px;
   }
 }

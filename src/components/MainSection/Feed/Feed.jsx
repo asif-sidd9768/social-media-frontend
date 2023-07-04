@@ -11,6 +11,7 @@ import { FeedFilter } from "../FeedFilter/FeedFilter"
 import { getFilteredFeeds } from "../../../utils/getFilteredFeeds"
 import { SideMenuProfile } from "../../SideMenuProfile/SideMenuProfile"
 import { UserStories } from "../UserStories/UserStories"
+import { EmptyFeed } from "../EmptyFeed/EmptyFeed"
 
 export const Feed = () => {
   const {postState} = useContext(PostContext)
@@ -54,9 +55,15 @@ export const Feed = () => {
         }
         {location.pathname.includes("profile") ? <FeedChangeBtns /> : <FeedPost />}
         {
-          filteredFeeds.map((post) =>
-            <PostCard key={post.id} {...post} />
-          )
+          filteredFeeds.length > 0 ? <>
+            {
+              filteredFeeds.map((post) =>
+                <PostCard key={post.id} {...post} />
+              )
+            }
+          </> : <>
+            <EmptyFeed />
+          </>
         }
       </div>
     </div>

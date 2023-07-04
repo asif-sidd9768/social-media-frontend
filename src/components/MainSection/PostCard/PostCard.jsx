@@ -56,6 +56,12 @@ export const PostCard = (post) => {
     }
     formData.append("content", event.target[0].value)
     postDispatch(postLoadingAction())
+
+    if(postState?.isLoading){
+      showNotification("Some work is going on.", "info")
+      return
+    }
+
     try{
       const result = await editPostService(formData, post.id)
       postDispatch(editPostAction(result.data))
@@ -71,6 +77,12 @@ export const PostCard = (post) => {
   const handlePostDelete = async () => {
     toggleControlBtn()
     postDispatch(postLoadingAction())
+
+    if(postState?.isLoading){
+      showNotification("Some work is going on.", "info")
+      return
+    }
+
     try {
       const {status} = await deletePostService(post.id)
       if(status === 200){

@@ -1,6 +1,7 @@
 .homepage-container {
   display: grid;
   grid-template-columns: 1fr;
+  padding: 0 0 15% 0;
 }
 
 .homepage-right-bar {

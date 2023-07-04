@@ -102,6 +102,7 @@ export const FeedPost = () => {
                 autoFocusSearch={false}
                 emojiStyle={EmojiStyle.APPLE}
                 height={350}
+                width="100%"
               />
             </div>}
           </div>

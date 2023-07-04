@@ -100,7 +100,8 @@
 
 .post-selected-image {
   position: absolute;
-  top: 15px;
-  right: 0;
+  top: 5px;
+  right: -15px;
   cursor: pointer;
+  color: var(--text-primary);
 }

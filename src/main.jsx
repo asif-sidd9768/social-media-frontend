@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom"
 
 import App from './App.jsx'
 // import { makeServer } from './server.js'
-
 import './index.css'
 import { ThemeContext, ThemeProvider } from './contexts/ThemeContext.jsx'
 import { PostContext, PostProvider } from './contexts/PostContext.jsx'

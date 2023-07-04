@@ -4,7 +4,6 @@ import { Routes, Route, useLocation } from "react-router-dom"
 
 import { NotificationContext, ThemeContext, UserContext } from './main'
 
-import './App.css'
 import { Homepage } from './pages/Homepage/Homepage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import { SideMenu } from './components/SideMenu/SideMenu'
@@ -13,6 +12,8 @@ import { PostDetail } from './pages/PostDetail/PostDetail'
 import { ProtectedRoutes } from './components/ProtectedRoutes/ProtectedRoutes'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { Notification } from './components/Notification/Notification'
+
+import './App.css'
 
 function App() {
   const { themeState } = useContext(ThemeContext)

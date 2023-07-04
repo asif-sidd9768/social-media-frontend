@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import "./PostCard.css"
+
 import { calculateTimeDiff } from "../../../utils/calculateTimeDiff"
 import { bookmarkPostService, deletePostService, editPostService, postDislikeService, postLikeService, removeBookmarkPostService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
@@ -12,6 +12,8 @@ import { NavLink, useLocation } from "react-router-dom"
 import { CommentCard } from "./Comments/CommentCard"
 import { CommentPost } from "./CommentPost/CommentPost"
 import { NotificationContext } from "../../../main"
+
+import "./PostCard.css"
 
 export const PostCard = (post) => {
   const {postState, postDispatch, handlePostLike} = useContext(PostContext)

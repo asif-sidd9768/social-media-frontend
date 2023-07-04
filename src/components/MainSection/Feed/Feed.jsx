@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { FeedPost } from "../FeedPost/FeedPost"
 
-import "./Feed.css"
 import { PostContext } from "../../../contexts/PostContext"
 import { PostCard } from "../PostCard/PostCard"
 import { UserContext } from "../../../contexts/UserContext"
@@ -12,6 +11,9 @@ import { getFilteredFeeds } from "../../../utils/getFilteredFeeds"
 import { SideMenuProfile } from "../../SideMenuProfile/SideMenuProfile"
 import { UserStories } from "../UserStories/UserStories"
 import { EmptyFeed } from "../EmptyFeed/EmptyFeed"
+
+import "./Feed.css"
+import { PostCardSkeleton } from "../PostCardSkeleton/PostCardSkeleton"
 
 export const Feed = () => {
   const {postState} = useContext(PostContext)
@@ -40,6 +42,14 @@ export const Feed = () => {
 
   const allFeeds = getFeeds()
   const filteredFeeds = getFilteredFeeds(postState.filters, allFeeds)
+
+  if(postState?.isLoading){
+    return <div className="feed-skeleton-container">
+     <PostCardSkeleton />
+     <PostCardSkeleton />
+     <PostCardSkeleton />
+    </div>
+  }
 
   return (
     <div className="feed-container">

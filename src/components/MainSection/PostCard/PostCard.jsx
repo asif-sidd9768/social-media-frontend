@@ -8,7 +8,7 @@ import { checkLikedPost } from "../../../utils/checkLikedPost"
 import { UserContext } from "../../../contexts/UserContext"
 import { postBookmarkAction, togglePostEditingAction } from "../../../actions/userActions"
 import { checkBookmarkPost } from "../../../utils/checkBookmarkPost"
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import { CommentCard } from "./Comments/CommentCard"
 import { CommentPost } from "./CommentPost/CommentPost"
 import { NotificationContext } from "../../../main"
@@ -22,6 +22,7 @@ export const PostCard = (post) => {
   const [showEditBtn, setShowEditBtn] = useState(false)
   const controlBtnRef = useRef(null);
   const fileInputRef = useRef(null)
+  const navigate = useNavigate()
   const location = useLocation()
 
   const isLikedByUser = checkLikedPost(post, userState?.user?.id)
@@ -104,7 +105,7 @@ export const PostCard = (post) => {
       <div className="post-card-header">
         <div className="post-card-user">
           <span className="post-card-profile">
-            <i className="fa-solid fa-circle-user"></i>
+            {post.userImage ? <img className="post-card-profile-img" src={post?.userImage} /> : <i className="fa-solid fa-circle-user"></i>}
           </span>
           <span className="post-card-header-text">
             <p>{post?.username}</p>
@@ -157,7 +158,7 @@ export const PostCard = (post) => {
           <i className="fa-solid fa-thumbs-up"></i> {isLikedByUser ? "Liked Post" : "Like Post"}  
           <strong className="post-card-like-count">{post?.likes?.likeCount}</strong>
         </span>
-        <span className={`post-card-comment-btn`}>
+        <span className={`post-card-comment-btn`} onClick={() => navigate(`/post/${post?.id}`)}>
           <i className="fa-solid fa-message"></i> Comment
         </span>
         <span>

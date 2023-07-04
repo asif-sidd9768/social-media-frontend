@@ -6,30 +6,40 @@ import EmojiPicker, {
 import { UserContext } from "../../../contexts/UserContext"
 import { feedPostService } from "../../../services/postService"
 import { PostContext } from "../../../contexts/PostContext"
-import { addNewPostAction, addPostAction, createNewPostAction, createNewPostSuccessAction, setPostAction, toggleEmojiPickerAction } from "../../../actions/postActions"
+import { addNewPostAction, addPostAction, createNewPostAction, createNewPostSuccessAction, postFailureAction, postLoadingAction, setPostAction, toggleEmojiPickerAction } from "../../../actions/postActions"
 
 import "./FeedPost.css"
+import { NotificationContext } from "../../../main";
 
 export const FeedPost = () => {
   const {userState} = useContext(UserContext)
   const { postState, postDispatch } = useContext(PostContext)
+  const {showNotification} = useContext(NotificationContext)
   const fileInputRef = useRef(null);
   const emojiPickerRef = useRef(null);
 
   const handleFeedSubmit = async (event) => {
+    if(postState.isLoading){
+      showNotification("Some work is going on.", "info")
+      return 
+    }
     event.preventDefault()
     const imageFile = postState?.newPost?.selectedImage
     const formData = new FormData()
     formData.append("postImage", imageFile)
     formData.append("content", event.target[0].value); // Add content field to formData
+    postDispatch(postLoadingAction())
     try {
       const {status, data} = await feedPostService(formData)
       if(status === 200){
         postDispatch(addPostAction(data))
         postDispatch(createNewPostSuccessAction())
+        showNotification("Added a post.", "success")
       }
     }catch(error){
       console.log(error)
+      postDispatch(postFailureAction(error))
+      showNotification("Failed to upload a post", "error")
     }
   }
 

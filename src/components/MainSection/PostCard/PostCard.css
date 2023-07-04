@@ -110,7 +110,7 @@
 .post-card-comment-btn {
   cursor: pointer;
   padding: 0 0 4px 0;
-  box-shadow: 0 2px 0 rgba(150,150,150,0.6);
+  /* box-shadow: 0 2px 0 rgba(150,150,150,0.6); */
 }
 
 .post-control-btn {
@@ -210,4 +210,9 @@
   border-bottom: 1px solid var(--liked);
   margin: 1rem 0 0 0;
   font-size: 1rem;
+}
+
+.post-card-profile-img {
+  max-width: 40px;
+  border-radius: 25px;
 }

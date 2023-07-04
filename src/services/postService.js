@@ -7,12 +7,11 @@ const config = {
 }
 export const fetchPosts = async (page) => {
   // const response = await axios.get(`/api/posts`)
-  const response = await axios.get(`${RESOURCES.BASE_URL}/api/posts?page=${page}&limit=10`)
+  const response = await axios.get(`${RESOURCES.BASE_URL}/api/posts?page=${page}&limit=30`)
   return response
 }
 
 export const feedPostService = async (feedData) => {
-  console.log(feedData)
   const response = await axios.post(`${RESOURCES.BASE_URL}/api/posts`, feedData , config)
   return response
 }

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialStateUser, userReducer } from "../reducers/UserReducer";
-import { loginUserAction, postBookmarkAction, setAllUsersAction, userStateFailureAction, userStateLoadingAction } from "../actions/userActions";
-import { getAllUsersService, loginUserService } from "../services/userService";
+import { loginUserAction, postBookmarkAction, setAllUsersAction, setUserStoriesAction, userStateFailureAction, userStateLoadingAction } from "../actions/userActions";
+import { getAllStoriesService, getAllUsersService, loginUserService } from "../services/userService";
 import { bookmarkPostService, removeBookmarkPostService } from "../services/postService";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isLoggedIn } from "../utils/isLoggedIn";
@@ -17,9 +17,11 @@ export const UserProvider = ({children}) => {
   async function loginUser (creds) {
     userDispatch(userStateLoadingAction())
     try {
+      console.log('creds==== ', creds)
       const {status, data} = await loginUserService(creds)
       if(status === 200){
         userDispatch(loginUserAction(data))
+        console.log('data' , data)
       }
       if(!localStorage.getItem("user")){
         localStorage.setItem("user", JSON.stringify({token: data.token, user: data.user}))
@@ -42,6 +44,18 @@ export const UserProvider = ({children}) => {
     }
     loadAllUsers()
   }, [])
+
+  useEffect(() => {
+    async function loadStories (){
+      try{
+        const result = await getAllStoriesService()
+        userDispatch(setUserStoriesAction(result.data))
+      }catch(error){
+        console.log(error)
+      }
+    }
+    loadStories()
+  },[])
 
   useEffect(() => {
     if(localStorage.getItem("user")){

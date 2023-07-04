@@ -8,6 +8,13 @@
   display: block;
 }
 
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0.5rem 0;
+}
+
 @media screen and (width >= 576px) {
   .side-menu-profile-mobile {
     display: none;

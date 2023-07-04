@@ -28,7 +28,16 @@ export const RightSideBar = () => {
     }
   }
 
-  const filteredUsers = userState?.allUsers?.filter(user => (user.id !== userState?.user?.id))
+  const filterCurrentUser = (users) => {
+    return users.filter(user => (user.id !== userState?.user?.id))
+  }
+
+  const filterFollowedUsers = (users) => {
+    const usersFilter = filterCurrentUser(users)
+    return userState?.user?.following.length < 1 ? usersFilter : usersFilter.filter((user) => userState?.user.following.some(f => f.id !== user.id))
+  }
+
+  const filteredUsers = filterFollowedUsers(userState?.allUsers)
 
   return (
     <div className="suggestions-main">

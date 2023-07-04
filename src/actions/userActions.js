@@ -58,3 +58,13 @@ export const userStateFailureAction = (errorData) => ({
   type:"USER_STATE_FAILURE",
   payload: errorData
 })
+
+export const setUserStoriesAction = (storiesData) => ({
+  type:"SET_USER_STORIES",
+  payload: storiesData
+})
+
+export const storyViewAction = (storyData) => ({
+  type:"STORY_VIEW",
+  payload: storyData
+})

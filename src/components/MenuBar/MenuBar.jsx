@@ -24,7 +24,7 @@ export const MenuBar = () => {
     localStorage.removeItem("token")
     toggleMenu()
     // showNotification("You're logged out.", "success")
-    navigate("/", {replace: true})
+    navigate("/login", {replace: true})
   }
 
 

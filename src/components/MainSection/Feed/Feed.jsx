@@ -10,6 +10,7 @@ import { FeedChangeBtns } from "../../ProfileSection/FeedChangeBtns/FeedChangeBt
 import { FeedFilter } from "../FeedFilter/FeedFilter"
 import { getFilteredFeeds } from "../../../utils/getFilteredFeeds"
 import { SideMenuProfile } from "../../SideMenuProfile/SideMenuProfile"
+import { UserStories } from "../UserStories/UserStories"
 
 export const Feed = () => {
   const {postState} = useContext(PostContext)
@@ -45,7 +46,12 @@ export const Feed = () => {
         <SideMenuProfile />
       </div>}
       <div className="feed-list-container">
-        {!location.pathname.includes("profile") && <FeedFilter />}
+        {!location.pathname.includes("profile") && 
+          <div className="feed-header">
+            <UserStories />
+            <FeedFilter />
+          </div>
+        }
         {location.pathname.includes("profile") ? <FeedChangeBtns /> : <FeedPost />}
         {
           filteredFeeds.map((post) =>

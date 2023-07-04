@@ -44,3 +44,18 @@ export const updateUserProfileImgService = async (formData) => {
   const response = await axios.post(`${RESOURCES.BASE_URL}/api/user/edit/profile`, formData, config)
   return response
 }
+
+export const storyPostService = async (userId, formData) => {
+  const response = await axios.post(`${RESOURCES.BASE_URL}/api/user/${userId}/story`, formData, config)
+  return response
+}
+
+export const getAllStoriesService = async () => {
+  const response = await axios.get(`${RESOURCES.BASE_URL}/api/user/stories`, config)
+  return response
+}
+
+export const storyViewService = async (userId, storyId) => {
+  const response = await axios.post(`${RESOURCES.BASE_URL}/api/user/${userId}/story/${storyId}`, {}, config)
+  return response
+}

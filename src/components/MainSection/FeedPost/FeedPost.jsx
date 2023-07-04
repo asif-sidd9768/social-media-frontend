@@ -35,11 +35,16 @@ export const FeedPost = () => {
 
   const handlePostImage = (event) => {
     const files = event.target.files;
-    console.log(files[0])
     if (files && files.length > 0) {
       postDispatch(createNewPostAction({selectedImage: files[0]}))
     }
   }
+
+  const handleDeselectImage = () => {
+    postDispatch(createNewPostAction({ selectedImage: null }));
+    // setFileInputKey((prevKey) => prevKey + 1); // Update the key to reset the file input element
+    fileInputRef.current.value = ""; // Manually reset the value of the file input element
+  };
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutsideEmojiPicker);
@@ -78,7 +83,7 @@ export const FeedPost = () => {
           <textarea onChange={(event) => postDispatch(createNewPostAction({content: event.target.value}))} value={postState?.newPost?.content}  placeholder="What's in your mind?" className="feed-post-input" />
         </div>
         {postState?.newPost?.selectedImage && <div className="post-selected-image-container">
-          <span onClick={() => postDispatch(createNewPostAction({selectedImage: null}))} className="post-selected-image">
+          <span onClick={handleDeselectImage} className="post-selected-image">
             <i className="fa-solid fa-x"></i>
           </span>
           {

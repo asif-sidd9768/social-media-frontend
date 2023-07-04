@@ -45,9 +45,11 @@ export const Feed = () => {
 
   if(postState?.isLoading){
     return <div className="feed-skeleton-container">
-     <PostCardSkeleton />
-     <PostCardSkeleton />
-     <PostCardSkeleton />
+      {
+        [1,2,3].map(index => 
+          <PostCardSkeleton key={index} />
+        )
+      }
     </div>
   }
 

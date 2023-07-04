@@ -92,3 +92,15 @@
   font-size: 0.7rem;
   cursor: pointer;
 }
+
+.post-selected-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.post-selected-image {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  cursor: pointer;
+}

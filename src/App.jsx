@@ -14,6 +14,7 @@ import { LoginPage } from './pages/LoginPage/LoginPage'
 import { Notification } from './components/Notification/Notification'
 
 import './App.css'
+import { ScrollToTop } from './components/ScrollToTop/ScrollToTop'
 
 function App() {
   const { themeState } = useContext(ThemeContext)
@@ -30,6 +31,7 @@ function App() {
         {!isLoginPage && !location.pathname.includes("profile") && <div><SideMenu /></div>}
       </div>
       <div className='app-main-section'>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />            
           <Route path="/bookmarks" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />

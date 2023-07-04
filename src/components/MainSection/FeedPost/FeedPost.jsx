@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef } from "react"
 import EmojiPicker, {
   EmojiStyle,
 } from "emoji-picker-react";
@@ -35,6 +35,7 @@ export const FeedPost = () => {
 
   const handlePostImage = (event) => {
     const files = event.target.files;
+    console.log(files[0])
     if (files && files.length > 0) {
       postDispatch(createNewPostAction({selectedImage: files[0]}))
     }
@@ -76,8 +77,15 @@ export const FeedPost = () => {
           </span>
           <textarea onChange={(event) => postDispatch(createNewPostAction({content: event.target.value}))} value={postState?.newPost?.content}  placeholder="What's in your mind?" className="feed-post-input" />
         </div>
-        {postState?.newPost?.selectedImage && <div>
-          <img className="feed-post-select-img" id="selectedImage" src={URL.createObjectURL(postState?.newPost?.selectedImage)} alt="Select image to show" />
+        {postState?.newPost?.selectedImage && <div className="post-selected-image-container">
+          <span onClick={() => postDispatch(createNewPostAction({selectedImage: null}))} className="post-selected-image">
+            <i className="fa-solid fa-x"></i>
+          </span>
+          {
+            postState?.newPost?.selectedImage?.type.includes("image") ?
+            <img className="feed-post-select-img" id="selectedImage" src={URL.createObjectURL(postState?.newPost?.selectedImage)} alt="Select image to show" /> :
+            <video className="feed-post-select-img" id="selectedImage" src={URL.createObjectURL(postState?.newPost?.selectedImage)} alt="Select image to show" />
+          }
         </div>}
         <div className="feed-post-btns">
           <div>

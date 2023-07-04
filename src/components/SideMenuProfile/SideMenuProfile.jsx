@@ -72,7 +72,7 @@ export const SideMenuProfile = () => {
               <input type="text" className={`profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${userState?.user?.lastName}`} readOnly={!userState?.isProfileEditing}/>
             </div>
             <p className="profile-username">@{userState?.user?.username}</p>
-            <textarea type="text" className={`profile-bio profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`Hi, Im developer in something and explorer too...`} readOnly={!userState?.isProfileEditing}/>
+            <textarea type="text" className={`profile-bio profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${userState?.user.bio}`} readOnly={!userState?.isProfileEditing}/>
           </div>
           <div className={`profile-url ${userState?.isProfileEditing ? "" : "profile-url-radius"}`}>
             {

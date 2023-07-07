@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr;
   padding: 0 0 15% 0;
+  position: relative;
 }
 
 .homepage-right-bar {
@@ -20,6 +21,10 @@
 
 .scroll-test {
   overflow-y: scroll;
+}
+
+.search-popup-mobile {
+  
 }
 
 @media screen and (width >= 1024px) {

@@ -7,10 +7,12 @@ import { PostAdd } from "../../components/PostAdd/PostAdd"
 import { SideMenu } from "../../components/SideMenu/SideMenu"
 
 import "./Homepage.css"
-import { PostContext } from "../../main"
+import { PostContext, UserContext } from "../../main"
 import { addNewPostAction } from "../../actions/postActions"
+import { SearchList } from "../../components/SearchList/SearchList"
 
 export const Homepage = () => {
+  const { userState } = useContext(UserContext)
   const { postState } = useContext(PostContext)
   
   return (
@@ -28,6 +30,9 @@ export const Homepage = () => {
         <MenuBar />
         {postState?.addingPost && <PostAdd  />}
       </div>
+      {userState?.mobileSearch && <div className="search-popup-mobile">
+        <SearchList />
+      </div>}
     </div>
   )
 }

@@ -1,0 +1,23 @@
+.search-card-container {
+  display: flex;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-card-img {
+  display: block;
+  max-width: 40px;
+  font-size: 40px;
+  border-radius: 25px;
+  margin: 0 0.5rem 0 0;
+}
+
+.search-card-fullname {
+ font-size: "Maven Pro"; 
+ margin: 0 0 0.2rem 0;
+}
+
+.search-card-username {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}

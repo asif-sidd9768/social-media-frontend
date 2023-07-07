@@ -54,6 +54,7 @@
 }
 
 .menu-home-btn {
+  font-size: 1.2rem;
   text-decoration: none;
   color: var(--text-primary);
 }
@@ -123,6 +124,21 @@ input:checked + .slider:before {
 
 .menu-pathname {
   text-transform: capitalize
+}
+
+.feed-explore-mobile {
+  font-size: 1.3rem;
+  margin:  0 0 0 0.5rem;
+}
+
+.feed-explore-mobile-ticked {
+  color: var(--liked);
+}
+
+@media screen and (width >= 576px) {
+  .feed-explore-mobile {
+    display: none;
+  }
 }
 
 @media screen and (width >= 690px) {

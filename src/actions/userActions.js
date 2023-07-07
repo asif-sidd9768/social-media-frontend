@@ -68,3 +68,13 @@ export const storyViewAction = (storyData) => ({
   type:"STORY_VIEW",
   payload: storyData
 })
+
+export const setSearchParamAction = (searchParam) => ({
+  type:"SET_SEARCH_PARAM",
+  payload: searchParam
+})
+
+export const mobileSearchAction = (data) => ({
+  type:"MOBILE_SEARCH",
+  payload: data
+})

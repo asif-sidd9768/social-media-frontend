@@ -24,7 +24,7 @@ export const PostProvider = ({children}) => {
     if(userState?.token){
       loadPosts()
     }
-  }, [])
+  }, [userState])
 
   useEffect(() => {
     localStorage.setItem("exploreFeed", postState?.exploreFeed)

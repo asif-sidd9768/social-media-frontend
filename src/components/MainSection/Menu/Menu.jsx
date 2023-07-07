@@ -13,7 +13,13 @@ import { FeedToggleBtns } from "./FeedToggleBtns/FeedToggleBtns"
 export const Menu = () => {
   const {themeState, themeDispatch} = useContext(ThemeContext)
   const { userState } = useContext(UserContext)
+  const {postState, postDispatch} = useContext(PostContext)
   const location = useLocation()
+
+  const handleFeedTypeToggleMobile = (type) => {
+    const toSet = postState?.exploreFeed === "no" ? "yes" : "no"
+    postDispatch(toggleExploreFeedAction(toSet))
+  }
 
   return (
     <div className="menu-container">
@@ -22,6 +28,7 @@ export const Menu = () => {
           <span><i className="fa-solid fa-house"></i></span>
           <span className="menu-pathname">{location.pathname === "/" ? "Home" : location.pathname.split("/")[1]}</span>
         </NavLink>
+        <span onClick={handleFeedTypeToggleMobile} className={`feed-explore-mobile ${postState?.exploreFeed === "yes" && "feed-explore-mobile-ticked"}`}><i className="fa-solid fa-compass"></i></span>
         {!location.pathname.includes("profile") && <div className="menu-explore">
           <FeedToggleBtns />
         </div>}

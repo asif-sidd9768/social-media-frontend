@@ -2,15 +2,16 @@ import { useContext, useEffect, useState } from "react";
 
 import MenuLogo from "../../assets/images/new-logo.jpeg"
 import { NavLink, useNavigate } from "react-router-dom";
-import { PostContext, UserContext } from "../../main";
+import { NotificationContext, PostContext, UserContext } from "../../main";
 
 import "./MenuBar.css"
-import { logoutAction } from "../../actions/userActions";
+import { logoutAction, mobileSearchAction } from "../../actions/userActions";
 import { addNewPostAction } from "../../actions/postActions";
 
 export const MenuBar = () => {
   const { userState, userDispatch } = useContext(UserContext)
   const { postState, postDispatch } = useContext(PostContext)
+  const { showNotification } = useContext(NotificationContext)
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
 
@@ -23,10 +24,14 @@ export const MenuBar = () => {
     localStorage.removeItem("user")
     localStorage.removeItem("token")
     toggleMenu()
-    // showNotification("You're logged out.", "success")
+    showNotification("You're logged out.", "success")
     navigate("/login", {replace: true})
   }
 
+  const handleMobileSearch = () => {
+    toggleMenu(!isOpen)
+    userDispatch(mobileSearchAction(true))
+  }
 
   return (
     <div className="menubar-container">
@@ -46,9 +51,9 @@ export const MenuBar = () => {
           (userState?.token) ? <div onClick={handleLogout} className="menubar-item menubar-item-logout">Logout</div> 
           : <div onClick={() => {navigate("/login"); toggleMenu()}} className="menubar-item menubar-item-logout">Login</div>
         }
-        {/* <div className="menubar-item">Item 2</div>
-        <div className="menubar-item">Item 3</div>
-        <div className="menubar-item">Item 4</div> */}
+        <div onClick={handleMobileSearch} className="menubar-item menubar-item-mobile-search">Search</div>
+        {/* <div className="menubar-item">Item 3</div> */}
+        {/* <div className="menubar-item">Item 4</div> */}
       </div>
       <div className="menubar-cart-btn">
         <NavLink className="menubar-cart-link" to="/bookmarks"><i className="fa-solid fa-bookmark"></i></NavLink>

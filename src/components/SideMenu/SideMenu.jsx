@@ -11,10 +11,12 @@ import { getAllEvents } from "../../services/eventService"
 import { UserContext } from "../../main"
 
 import "./SideMenu.css"
+import { SearchList } from "../SearchList/SearchList"
+import { setSearchParamAction } from "../../actions/userActions"
 
 export const SideMenu = () => {
   const [events, setEvents] = useState({eventsData: [], selectedEvent:null})
-  const { userState } = useContext(UserContext)
+  const { userState, userDispatch } = useContext(UserContext)
   const getActiveStyles = ({isActive}) => ({
     color: isActive ?  "var(--liked)" : "",
     backgroundColor: isActive ? "var(--border-color)" : "",
@@ -56,6 +58,10 @@ export const SideMenu = () => {
       }));
     }
   };
+
+  const handleUserSearch = (event) => {
+    userDispatch(setSearchParamAction(event.target.value))
+  }
   
   return (
     <aside className="side-menu-container">
@@ -63,7 +69,10 @@ export const SideMenu = () => {
       <img src={logoImgShort} className="side-menu-logo-short" />
       <div className="side-menu-search-container">
         <span className="side-menu-search-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
-        <input placeholder="Search" className="side-menu-search-input" />
+        <input placeholder="Search" onChange={handleUserSearch} className="side-menu-search-input" />
+      </div>
+      <div className="search-list-desktop">
+        {userState?.searchParam && <SearchList />}
       </div>
       <div className="side-menu-explore">
         <FeedToggleBtns />

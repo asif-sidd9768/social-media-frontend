@@ -7,7 +7,9 @@ export const initialStateUser = {
   feedOnUserProfile: "my",
   isProfileEditing: false,
   isPostEditing: false,
-  userStories: []
+  userStories: [],
+  searchParam: "",
+  mobileSearch: false,
 }
 
 export const userReducer = (state, action) => {
@@ -26,7 +28,6 @@ export const userReducer = (state, action) => {
     case "SET_USER_STORIES":
       return {...state, userStories: action.payload}
     case "STORY_VIEW":{
-      console.log('here=== ')
       const updatedStories = state.userStories.map(story => story.id === action.payload.id ? action.payload : story )
       return {...state, userStories:updatedStories}
     }
@@ -50,6 +51,10 @@ export const userReducer = (state, action) => {
       return {...state, user: {...state.user, eventsJoined: [...state.user.eventsJoined, action.payload]}, isLoading: false}
     case "LOGOUT_USER":
       return {...state, user:{}, token: null}
+    case "SET_SEARCH_PARAM":
+      return {...state, searchParam: action.payload}
+    case "MOBILE_SEARCH":
+      return {...state, mobileSearch: action.payload}
     default:
       return {...state}
   }

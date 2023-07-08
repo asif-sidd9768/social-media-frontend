@@ -10,6 +10,7 @@ export const initialStateUser = {
   userStories: [],
   searchParam: "",
   mobileSearch: false,
+  profileUser: null
 }
 
 export const userReducer = (state, action) => {
@@ -55,6 +56,8 @@ export const userReducer = (state, action) => {
       return {...state, searchParam: action.payload}
     case "MOBILE_SEARCH":
       return {...state, mobileSearch: action.payload}
+    case "SET_PROFILE_USER":
+      return {...state, profileUser: action.payload, isLoading: false}
     default:
       return {...state}
   }

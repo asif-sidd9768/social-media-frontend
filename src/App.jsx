@@ -24,23 +24,21 @@ function App() {
   const isLoginPage = location.pathname.includes("login")
 
   return (
-    <div className={`App ${!isLoginPage && "main-app-container"}`} data-theme={themeState.currentTheme}>
+    <div className={`App`} data-theme={themeState.currentTheme}>
       {notificationState.notifications.length > 0 && <Notification />}
-      <div className='main-app-sidemenu'>
+      {/* <div className='main-app-sidemenu'>
         {location.pathname.includes("profile") && <div className=''><SideMenuProfile /></div>}
         {!isLoginPage && !location.pathname.includes("profile") && <div><SideMenu /></div>}
-      </div>
-      <div className='app-main-section'>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />            
-          <Route path="/bookmarks" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />
-          <Route path="/liked" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/profile/:userId" element={<ProtectedRoutes isSignedIn={userState?.token}><ProfilePage /></ProtectedRoutes>} />
-          <Route path="/post/:postId" element={<PostDetail />} />
-        </Routes>
-      </div>
+      </div> */}
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />            
+        <Route path="/bookmarks" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />
+        <Route path="/liked" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/profile/:username" element={<ProtectedRoutes isSignedIn={userState?.token}><ProfilePage /></ProtectedRoutes>} />
+        <Route path="/post/:postId" element={<PostDetail />} />
+      </Routes>
     </div>
   )
 }

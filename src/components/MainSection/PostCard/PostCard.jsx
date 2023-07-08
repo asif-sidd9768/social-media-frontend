@@ -100,10 +100,14 @@ export const PostCard = (post) => {
     }
   }
 
+  const handleUserNameClick = () => {
+    navigate(`/profile/${post.username}`)
+  }
+
   return (
     <div className="post-card-container">
       <div className="post-card-header">
-        <div className="post-card-user">
+        <div onClick={handleUserNameClick} className="post-card-user">
           <span className="post-card-profile">
             {post.userImage ? <img className="post-card-profile-img" src={post?.userImage} /> : <i className="fa-solid fa-circle-user"></i>}
           </span>

@@ -13,11 +13,13 @@ import { LoginPageGraphics } from '../../components/LoginPageGraphics/LoginPageG
 export const LoginPage = () => {
   
   return (
-    <div className="login-container">
-      <div className='login-graphics'>
-        <LoginPageGraphics />
+    <div className='login-main-container'>
+      <div className="login-container">
+        <div className='login-graphics'>
+          <LoginPageGraphics />
+        </div>
+        <LoginFormPage />
       </div>
-      <LoginFormPage />
     </div>
   )
 }

@@ -33,6 +33,11 @@ export const getAllUsersService = async () => {
   return response
 }
 
+export const getUserService = async (username) => {
+  const response = await axiosInstance.post(`${RESOURCES.BASE_URL}/api/user/${username}`)
+  return response
+}
+
 export const loginUserService = async (credentials) => {
   const response = await axiosInstance.post(`${RESOURCES.BASE_URL}/api/user/login`, credentials)
   return response

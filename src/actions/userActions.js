@@ -78,3 +78,8 @@ export const mobileSearchAction = (data) => ({
   type:"MOBILE_SEARCH",
   payload: data
 })
+
+export const setProfileUserAction = (userData) => ({
+  type:"SET_PROFILE_USER",
+  payload:userData
+})

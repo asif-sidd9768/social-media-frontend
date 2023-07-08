@@ -10,8 +10,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginForm = ({handleLogin}) => {
-  const navigate = useNavigate()
-  const location = useLocation()
 
   return (
     <Formik

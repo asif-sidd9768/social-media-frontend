@@ -16,17 +16,6 @@ export const PostCardSkeleton = () => {
                 <Skeleton count={2} />
               </span>
             </div>
-            {/* <div className="post-card-header-btns">
-              <span>
-                <Skeleton circle={true} height={24} width={24} />
-              </span>
-              <span className="post-control-btn">
-                <Skeleton circle={true} height={24} width={24} />
-                <div className="post-btns">
-                  <Skeleton count={2} />
-                </div>
-              </span>
-            </div> */}
           </div>
           <div className="post-card-img-container">
             <Skeleton height={100}  />

@@ -16,26 +16,57 @@ export const Homepage = () => {
   const { postState } = useContext(PostContext)
   
   return (
-    <div className="homepage-main">
-      <div className="homepage-menu">
-        <Menu />
+    <div className="homepage-main-container main-app-container">
+      <div>
+        <SideMenu/>
       </div>
-      <div className="homepage-container" >
-        <div className="scroll-test">
-          <MainSection />
+      <div className="app-main-section">
+        <div className="homepage-main">
+          <div className="homepage-menu">
+            <Menu />
+          </div>
+          <div className="homepage-container" >
+            <div className="scroll-test">
+              <MainSection />
+            </div>
+            <div className="homepage-right-bar">
+              <RightSideBar />
+            </div>      
+            <MenuBar />
+            {postState?.addingPost && <PostAdd  />}
+          </div>
+          {userState?.mobileSearch && <div className="search-popup-mobile">
+            <SearchList />
+            </div>}
+          </div>
         </div>
-        <div className="homepage-right-bar">
-          <RightSideBar />
-        </div>      
-        <MenuBar />
-        {postState?.addingPost && <PostAdd  />}
-      </div>
-      {userState?.mobileSearch && <div className="search-popup-mobile">
-        <SearchList />
-      </div>}
     </div>
+      
   )
 }
+
+
+{/* <div className="main-app-container">
+      <SideMenu />
+      <div className="homepage-main">
+        <div className="homepage-menu">
+          <Menu />
+        </div>
+        <div className="homepage-container" >
+          <div className="scroll-test">
+            <MainSection />
+          </div>
+          <div className="homepage-right-bar">
+            <RightSideBar />
+          </div>      
+          <MenuBar />
+          {postState?.addingPost && <PostAdd  />}
+        </div>
+        {userState?.mobileSearch && <div className="search-popup-mobile">
+          <SearchList />
+        </div>}
+      </div>
+    </div> */}
 
 {/* <div className="homepage-main">
       <div>

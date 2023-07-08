@@ -81,7 +81,7 @@ export const SideMenu = () => {
         <NavLink to="/" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-house"></i><span className="nav-item-name">Home</span></NavLink>
         <NavLink to="/bookmarks" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-bookmark"></i><span className="nav-item-name">Bookmarks</span></NavLink>
         <NavLink to="/liked" style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-heart"></i><span className="nav-item-name">Liked</span></NavLink>
-        <NavLink to={`/profile/${userState?.user?.id}`} style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-user"></i><span className="nav-item-name">Profile</span></NavLink>
+        <NavLink to={`/profile/${userState?.user?.username}`} style={getActiveStyles} className="side-menu-nav-item"><i className="fa-solid fa-user"></i><span className="nav-item-name">Profile</span></NavLink>
       </div>
       <hr className="side-menu-divider" />
       <div className="side-menu-recent">

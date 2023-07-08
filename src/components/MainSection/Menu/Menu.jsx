@@ -44,7 +44,7 @@ export const Menu = () => {
           {userState?.user?.firstName} {userState?.user?.lastName[0] }
         </span>}
         {userState?.token && <span className="">
-          <NavLink to={`/profile/${userState?.user?.id}`} className="menu-user-profile">
+          <NavLink to={`/profile/${userState?.user?.username}`} className="menu-user-profile">
             {/* <i className="fa-solid fa-circle-user"></i> */}
             {userState?.user?.profileImg ? <img className="suggestions-user-profile" src={userState?.user?.profileImg} /> : <i className="fa-solid fa-circle-user"></i>}
           </NavLink>

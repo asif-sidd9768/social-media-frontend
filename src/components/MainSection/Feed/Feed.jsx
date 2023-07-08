@@ -24,11 +24,11 @@ export const Feed = () => {
     if(location.pathname.includes("profile")){
       switch(userState.feedOnUserProfile){
         case "my":
-          return postState?.posts.filter(({username}) => username === userState?.user?.username)
+          return postState?.posts.filter(({username}) => username === userState?.profileUser?.username)
         case "liked":
-          return postState?.posts?.filter(({likes}) => likes?.likedBy?.some(user => user.id === userState?.user?.id))
+          return postState?.posts?.filter(({likes}) => likes?.likedBy?.some(user => user.id === userState?.profileUser?.id))
         case "bookmarked":
-          return postState?.posts?.filter(({id}) => userState?.user?.bookmarks?.some(bk => bk._id === id))
+          return postState?.posts?.filter(({id}) => userState?.profileUser?.bookmarks?.some(bk => bk._id === id))
       }
     }
     switch(location.pathname){

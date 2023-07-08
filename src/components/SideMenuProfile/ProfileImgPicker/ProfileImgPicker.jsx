@@ -5,33 +5,7 @@ import { UserContext } from "../../../main"
 import { updateUserProfileAction } from "../../../actions/userActions"
 
 import "./ProfileImgPicker.css"
-
-const avatarImages = [
-  {
-    id:1,
-    url: "https://i.ibb.co/BBm8N6q/avatar6.png"
-  },
-  {
-    id:2,
-    url: "https://i.ibb.co/mJm6fx9/avatar5.png"
-  },
-  {
-    id:3,
-    url: "https://i.ibb.co/bP848Gy/avatar4.png"
-  },
-  {
-    id:4,
-    url: "https://i.ibb.co/GHgNx8f/avatar3.jpg"
-  },
-  {
-    id:5,
-    url: "https://i.ibb.co/z4Mcn1t/avatar1.jpg"
-  },
-  {
-    id:6,
-    url: "https://i.ibb.co/3m7tHBQ/avatar2.jpg"
-  }
-]
+import { AVATAR_IMAGES } from "../../../db/avatarImages"
 
 export const ProfileImgPicker = ({toggleImagePicker}) => {
   const { userDispatch } = useContext(UserContext)
@@ -64,9 +38,12 @@ export const ProfileImgPicker = ({toggleImagePicker}) => {
   };
   return (
     <div className="img-picker-container">
+      <div onClick={toggleImagePicker} className="img-picker-close">
+        <i className="fa-solid fa-x"></i>
+      </div>
       <div className="img-picker">
         {
-          avatarImages.map((img, index) => 
+          AVATAR_IMAGES.map((img, index) => 
           <div key={index}>
             <img  src={img.url} className="img-picker-img" onClick={(event) => handleProfileImageChange(event, img)}/> 
           </div>

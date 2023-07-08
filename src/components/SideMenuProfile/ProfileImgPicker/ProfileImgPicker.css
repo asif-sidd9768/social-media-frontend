@@ -1,6 +1,7 @@
 .img-picker-container {
   padding: 1rem;
   background-color: rgba(20,20,20,0.8);
+  position: relative;
 }
 
 .img-picker {
@@ -19,4 +20,8 @@
   padding: 6px;
   margin: 1rem 0 0 0;
   cursor: pointer;
+}
+
+.img-picker-close {
+  text-align: right;
 }

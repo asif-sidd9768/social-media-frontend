@@ -1,19 +1,37 @@
 
 
 import profileBg from "../../assets/images/profile-bg.jpg"
-import profileImg from "../../assets/images/profile.jpg"
 import logoImg from "../../assets/images/logo-new.png"
 import "./SideMenuProfile.css"
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { UserContext } from "../../main"
-import { toggleProfileEditAction, updateUserProfileAction } from "../../actions/userActions"
-import { updateUserProfileImgService, updateUserService } from "../../services/userService"
+import { setProfileUserAction, toggleProfileEditAction, updateUserProfileAction, userStateFailureAction, userStateLoadingAction } from "../../actions/userActions"
+import { getUserService, updateUserService } from "../../services/userService"
 import { ProfileImgPicker } from "./ProfileImgPicker/ProfileImgPicker"
+import { useParams } from "react-router-dom"
+import { SideMenuProfileSkeleton } from "./SideMenuProfileSkeleton"
 
 export const SideMenuProfile = () => {
   const {userState, userDispatch} = useContext(UserContext)
   const [showPicker, setShowPicker] = useState(false)
+  const { username } = useParams()
+  const profilePickerRef = useRef(null)
+
+  const profileData = userState?.profileUser?.username === userState?.user?.username ? userState?.user : userState?.profileUser
   
+  useEffect(() => {
+    async function loadUser (){
+      userDispatch(userStateLoadingAction())
+      try{
+        const result = await getUserService(username)
+        userDispatch(setProfileUserAction(result.data))
+      }catch(error){
+        console.log(error)
+        userDispatch(userStateFailureAction(error))
+      }
+    }
+    loadUser()
+  }, [])
 
   const handleProfileChange = async (event) => {
     event.preventDefault()
@@ -33,10 +51,15 @@ export const SideMenuProfile = () => {
   }
 
   const toggleImagePicker = () => {
-    console.log('cliced')
     setShowPicker(!showPicker)
   }
+
+  if(userState?.isLoading || !userState?.profileUser){
+    return <SideMenuProfileSkeleton />
+  }
   
+  const isCurrentUser = userState?.user?.username === userState?.profileUser?.username
+
   return (
     <aside className="side-menu-profile-container">
       <img src={logoImg} className="side-menu-profile-logo" />
@@ -45,40 +68,43 @@ export const SideMenuProfile = () => {
           <div className="profile-bg-container">
             <img src={profileBg} className="profile-bg" />
           </div>
-          <span className="profile-edit-btn" onClick={() => userDispatch(toggleProfileEditAction())}>
+          {isCurrentUser && <span className="profile-edit-btn" onClick={() => userDispatch(toggleProfileEditAction())}>
             <i className="fa-regular fa-pen-to-square"></i>Edit
-          </span>
+          </span>}
           <div className="profile-foll-container">
             <div className="profile-followers">
-              <p>{userState?.user?.followers?.length}</p>
+              <p>{profileData.followers?.length}</p>
               <p>Followers</p>
             </div>
             <div className="profile-img-container">
-              {showPicker && <div className="profile-picker">
+              {showPicker && <div className="profile-picker" ref={profilePickerRef}>
                 <ProfileImgPicker toggleImagePicker={toggleImagePicker} />
               </div>}
-              {userState?.user?.profileImg ? 
-                <img src={userState?.user?.profileImg} className="profile-img" onClick={toggleImagePicker} /> :
-                <i onClick={toggleImagePicker} className="fa-solid fa-circle-user profile-img"></i>}
+              {profileData.profileImg ? 
+                <img src={profileData.profileImg} className="profile-img" /> :
+                <i className="fa-solid fa-circle-user profile-img"></i>}
+              {isCurrentUser && <span onClick={toggleImagePicker} className="profile-edit-icon">
+                <i className="fa-solid fa-edit"></i>
+              </span>}
             </div>
             <div className="profile-following">
-              <p>{userState?.user?.following?.length}</p>
+              <p>{profileData.following?.length}</p>
               <p>Following</p>
             </div>
           </div>
           <div className="profile-details">
             <div className="profile-name">
-              <input type="text" className={`profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${userState?.user?.firstName}`} readOnly={!userState?.isProfileEditing}/>
-              <input type="text" className={`profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${userState?.user?.lastName}`} readOnly={!userState?.isProfileEditing}/>
+              <input type="text" className={`profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${profileData.firstName}`} readOnly={!userState?.isProfileEditing}/>
+              <input type="text" className={`profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${profileData.lastName}`} readOnly={!userState?.isProfileEditing}/>
             </div>
-            <p className="profile-username">@{userState?.user?.username}</p>
-            <textarea type="text" className={`profile-bio profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${userState?.user.bio}`} readOnly={!userState?.isProfileEditing}/>
+            <p className="profile-username">@{profileData.username}</p>
+            {profileData.bio && <textarea type="text" className={`profile-bio profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${profileData.bio}`} readOnly={!userState?.isProfileEditing}/>}
           </div>
           <div className={`profile-url ${userState?.isProfileEditing ? "" : "profile-url-radius"}`}>
             {
               userState?.isProfileEditing 
               ? <input type="text" className={`profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={"www.asifsiddique.in"} readOnly={!userState.isProfileEditing}/>
-              : <a href="#" target="_blank">www.asifsiddique.in <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+              : <a href="#" target="_blank">{profileData?.url ? profileData?.url : "Nothing..."} <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
             } 
           </div>
           {

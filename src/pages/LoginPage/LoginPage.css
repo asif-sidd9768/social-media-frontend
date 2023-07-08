@@ -1,8 +1,16 @@
+.login-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .login-container { 
   /* background-color: var(--border-color); */
   display: grid;
   grid-template-columns: 1fr;
   height: 100%;
+  width: 100%;
 
   /* align-items: center;
   justify-content: center; */
@@ -149,10 +157,11 @@
 @media screen and (width >= 768px) {
   .login-container { 
     /* background-color: var(--border-color); */
-    padding: 2rem;
-    margin: 2rem;
+    /* padding: 2rem;
+    margin: 2rem; */
     grid-template-columns: 1fr 1fr;
     height: 70%;
+    width: 80%;
   }
 
   .login-graphics {

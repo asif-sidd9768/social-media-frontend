@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialStateUser, userReducer } from "../reducers/UserReducer";
-import { loginUserAction, postBookmarkAction, setAllUsersAction, setUserStoriesAction, userStateFailureAction, userStateLoadingAction } from "../actions/userActions";
-import { getAllStoriesService, getAllUsersService, loginUserService } from "../services/userService";
+import { followUserAction, loginUserAction, postBookmarkAction, setAllUsersAction, setUserStoriesAction, unfollowUserAction, userStateFailureAction, userStateLoadingAction } from "../actions/userActions";
+import { followUserService, getAllStoriesService, getAllUsersService, loginUserService, unfollowUserService } from "../services/userService";
 import { bookmarkPostService, removeBookmarkPostService } from "../services/postService";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isLoggedIn } from "../utils/isLoggedIn";
@@ -104,8 +104,27 @@ export const UserProvider = ({children}) => {
     }
   };
 
+  const handleFollowUser = async (userId, alreadyFollowing, username) => {
+    try {
+      userDispatch(userStateLoadingAction())
+      if(alreadyFollowing){
+        const {status, data} = await unfollowUserService(userId)
+        userDispatch(unfollowUserAction(data))
+        showNotification(`Unfollowed ${username}`, "success")
+      }else{ 
+        const {status, data} = await followUserService(userId)
+        userDispatch(followUserAction(data))
+        showNotification(`Followed ${username}`, "success")
+      }
+    }catch(error){
+      console.log(error)
+      userDispatch(userStateFailureAction(error.data))
+      showNotification(`Failed to follow/unfollow`, "error")
+    }
+  }
+
   return (
-    <UserContext.Provider value={{userState, userDispatch, loginUser, handlePostBookmark}}>
+    <UserContext.Provider value={{userState, userDispatch, loginUser, handlePostBookmark, handleFollowUser}}>
       {children}
     </UserContext.Provider>
   )

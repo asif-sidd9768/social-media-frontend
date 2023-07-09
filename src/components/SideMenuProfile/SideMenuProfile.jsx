@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom"
 import { SideMenuProfileSkeleton } from "./SideMenuProfileSkeleton"
 
 export const SideMenuProfile = () => {
-  const {userState, userDispatch} = useContext(UserContext)
+  const {userState, userDispatch, handleFollowUser} = useContext(UserContext)
   const [showPicker, setShowPicker] = useState(false)
   const { username } = useParams()
   const profilePickerRef = useRef(null)
@@ -99,6 +99,7 @@ export const SideMenuProfile = () => {
             </div>
             <p className="profile-username">@{profileData.username}</p>
             {profileData.bio && <textarea type="text" className={`profile-bio profile-${userState.isProfileEditing ? "is" : "not"}-editing-text`} defaultValue={`${profileData.bio}`} readOnly={!userState?.isProfileEditing}/>}
+            {userState?.profileUser?.username !== userState?.user?.username && <button onClick={() => handleFollowUser(profileData.id, userState?.user?.following?.some(foll => foll.id === profileData.id), profileData.username )} className="profile-follow-btn">Follow</button>}
           </div>
           <div className={`profile-url ${userState?.isProfileEditing ? "" : "profile-url-radius"}`}>
             {

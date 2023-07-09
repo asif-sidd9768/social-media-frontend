@@ -6,27 +6,7 @@ import { followUserAction, unfollowUserAction, userStateFailureAction, userState
 import { NotificationContext } from "../../../main"
 
 export const RightSideBar = () => {
-  const { userState, userDispatch} = useContext(UserContext)
-  const { showNotification } = useContext(NotificationContext)
-
-  const handleFollowUser = async (userId, alreadyFollowing, username) => {
-    try {
-      userDispatch(userStateLoadingAction())
-      if(alreadyFollowing){
-        const {status, data} = await unfollowUserService(userId)
-        userDispatch(unfollowUserAction(data))
-        showNotification(`Unfollowed ${username}`, "success")
-      }else{ 
-        const {status, data} = await followUserService(userId)
-        userDispatch(followUserAction(data))
-        showNotification(`Followed ${username}`, "success")
-      }
-    }catch(error){
-      console.log(error)
-      userDispatch(userStateFailureAction(error.data))
-      showNotification(`Failed to follow/unfollow`, "error")
-    }
-  }
+  const { userState, handleFollowUser} = useContext(UserContext)
 
   const filterCurrentUser = (users) => {
     return users.filter(user => (user.id !== userState?.user?.id))

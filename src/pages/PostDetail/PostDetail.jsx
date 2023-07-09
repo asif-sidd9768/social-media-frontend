@@ -19,7 +19,7 @@ export const PostDetail = () => {
   
   return (
     <div className="detail-main-container main-app-container">
-      <div>
+      <div className="main-app-sidemenu">
         <SideMenu />
       </div>
       <div className="app-main-section">

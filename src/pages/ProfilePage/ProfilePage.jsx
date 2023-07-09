@@ -7,7 +7,7 @@ import "./ProfilePage.css"
 export const ProfilePage = () => {
   return (
     <div className="profile-main-container main-app-container">
-      <div >
+      <div className="main-app-sidemenu">
         <SideMenuProfile />
       </div>
       <div className="app-main-section">

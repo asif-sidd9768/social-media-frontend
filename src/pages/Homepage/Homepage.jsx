@@ -17,7 +17,7 @@ export const Homepage = () => {
   
   return (
     <div className="homepage-main-container main-app-container">
-      <div>
+      <div className="main-app-sidemenu">
         <SideMenu/>
       </div>
       <div className="app-main-section">

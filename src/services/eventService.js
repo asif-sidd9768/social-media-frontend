@@ -1,17 +1,27 @@
 import axios from "axios"
 import { RESOURCES } from "../utils/resources"
-const config = {
-  headers: {
-    authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.token}`
+
+const axiosInstance = axios.create({
+  baseURL: RESOURCES.BASE_URL
+});
+
+// Add an interceptor for requests
+axiosInstance.interceptors.request.use((config) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+  if (token) {
+    config.headers.authorization = `Bearer ${token}`;
   }
-}
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 export const getAllEvents = async () => {
-  const response = await axios.get(`${RESOURCES.BASE_URL}/api/events`)
+  const response = await axiosInstance.get(`${RESOURCES.BASE_URL}/api/events`)
   return response
 }
 
 export const joinEventService = async (eventId, userId) => {
-  const response = await axios.post(`${RESOURCES.BASE_URL}/api/events/${eventId}/join/${userId}`, {}, config)
+  const response = await axiosInstance.post(`${RESOURCES.BASE_URL}/api/events/${eventId}/join/${userId}`, {})
   return response
 }

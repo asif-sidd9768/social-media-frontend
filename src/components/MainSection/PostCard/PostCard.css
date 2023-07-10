@@ -195,12 +195,14 @@
 
 .post-card-img-container {
   margin: 1rem 0 0 0;
+  
 }
 
 .post-card-img {
   max-width: 100%;
   max-height: 100%;
   display: block;;
+  margin: 0 auto;
 }
 
 .post-is-editing {

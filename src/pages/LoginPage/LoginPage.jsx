@@ -1,14 +1,7 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-
-
-import "./LoginPage.css"
-import { useState } from 'react';
-import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
-import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { LoginFormPage } from '../../components/LoginPageForm/LoginPageForm';
 import { LoginPageGraphics } from '../../components/LoginPageGraphics/LoginPageGraphics';
 
+import "./LoginPage.css"
 
 export const LoginPage = () => {
   

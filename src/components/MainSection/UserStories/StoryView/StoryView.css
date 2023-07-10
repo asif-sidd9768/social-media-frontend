@@ -5,15 +5,16 @@
   top: 0;
   left: 0;
   background-color: rgba(0,0,0,0.7);
-  z-index: 5;
+  z-index: 4;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .story-content {
   width: 80%;
   position: relative;
-  margin: 5rem 0 0 0;
+  /* margin: 5rem 0 0 0; */
 }
 
 .story-img {

@@ -1,35 +1,26 @@
 
 import { useContext } from 'react'
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 import { NotificationContext, ThemeContext, UserContext } from './main'
-
 import { Homepage } from './pages/Homepage/Homepage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
-import { SideMenu } from './components/SideMenu/SideMenu'
-import { SideMenuProfile } from './components/SideMenuProfile/SideMenuProfile'
 import { PostDetail } from './pages/PostDetail/PostDetail'
 import { ProtectedRoutes } from './components/ProtectedRoutes/ProtectedRoutes'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { Notification } from './components/Notification/Notification'
+import { ScrollToTop } from './components/ScrollToTop/ScrollToTop'
 
 import './App.css'
-import { ScrollToTop } from './components/ScrollToTop/ScrollToTop'
 
 function App() {
   const { themeState } = useContext(ThemeContext)
   const { userState } = useContext(UserContext)
   const { notificationState } = useContext(NotificationContext)
-  const location = useLocation()
-  const isLoginPage = location.pathname.includes("login")
 
   return (
     <div className={`App`} data-theme={themeState.currentTheme}>
       {notificationState.notifications.length > 0 && <Notification />}
-      {/* <div className='main-app-sidemenu'>
-        {location.pathname.includes("profile") && <div className=''><SideMenuProfile /></div>}
-        {!isLoginPage && !location.pathname.includes("profile") && <div><SideMenu /></div>}
-      </div> */}
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<ProtectedRoutes isSignedIn={userState?.token}><Homepage /></ProtectedRoutes>} />            

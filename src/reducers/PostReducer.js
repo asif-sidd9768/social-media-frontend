@@ -66,6 +66,8 @@ export const postReducer = (state, action) => {
     }
     case "ADDING_NEW_POST":
       return {...state, addingPost: action.payload, isLoading: false}
+    case "INCREMENT_PAGE":
+      return {...state, page: state.page + 1}
     default: 
       return {...state}
   }

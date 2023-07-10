@@ -1,15 +1,14 @@
+import { useContext, useRef, useState } from "react"
 
+import { UserContext } from "../../main"
+import { toggleProfileEditAction, updateUserProfileAction } from "../../actions/userActions"
+import { updateUserService } from "../../services/userService"
+import { ProfileImgPicker } from "./ProfileImgPicker/ProfileImgPicker"
+import { SideMenuProfileSkeleton } from "./SideMenuProfileSkeleton"
 
 import profileBg from "../../assets/images/profile-bg.jpg"
 import logoImg from "../../assets/images/logo-new.png"
 import "./SideMenuProfile.css"
-import { useContext, useEffect, useRef, useState } from "react"
-import { UserContext } from "../../main"
-import { setProfileUserAction, toggleProfileEditAction, updateUserProfileAction, userStateFailureAction, userStateLoadingAction } from "../../actions/userActions"
-import { getUserService, updateUserService } from "../../services/userService"
-import { ProfileImgPicker } from "./ProfileImgPicker/ProfileImgPicker"
-import { useParams } from "react-router-dom"
-import { SideMenuProfileSkeleton } from "./SideMenuProfileSkeleton"
 
 export const SideMenuProfile = ({profileData}) => {
   const {userState, userDispatch, handleFollowUser} = useContext(UserContext)

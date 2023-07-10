@@ -1,14 +1,14 @@
 import { useContext } from "react"
 
 import {ThemeContext} from "../../../contexts/ThemeContext"
-
-import "./Menu.css"
 import { toggleThemeAction } from "../../../actions/themeActions"
 import { PostContext } from "../../../contexts/PostContext"
 import { toggleExploreFeedAction } from "../../../actions/postActions"
 import { UserContext } from "../../../contexts/UserContext"
 import { NavLink, useLocation } from "react-router-dom"
 import { FeedToggleBtns } from "./FeedToggleBtns/FeedToggleBtns"
+
+import "./Menu.css"
 
 export const Menu = () => {
   const {themeState, themeDispatch} = useContext(ThemeContext)
@@ -45,7 +45,6 @@ export const Menu = () => {
         </span>}
         {userState?.token && <span className="">
           <NavLink to={`/profile/${userState?.user?.username}`} className="menu-user-profile">
-            {/* <i className="fa-solid fa-circle-user"></i> */}
             {userState?.user?.profileImg ? <img className="suggestions-user-profile" src={userState?.user?.profileImg} /> : <i className="fa-solid fa-circle-user"></i>}
           </NavLink>
         </span>}

@@ -69,7 +69,6 @@ export const UserStories = () => {
       console.log(error)
     }
   }
-  console.log(userState)
 
   const handleStoryView = async (story) => {
     isStoryViewedByUser(story, userState?.user?.id)

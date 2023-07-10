@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 
 import { initialStatePost, postReducer } from "../reducers/PostReducer";
 import { fetchPosts, postDislikeService, postLikeService } from "../services/postService";
-import { dislikePostAction, postFailureAction, postLoadingAction, setPostAction } from "../actions/postActions";
+import { dislikePostAction, incrementPageAction, postFailureAction, postLoadingAction, setPostAction } from "../actions/postActions";
 import { NotificationContext } from "./NotificationContext";
 import { UserContext } from "./UserContext";
 
@@ -11,6 +11,7 @@ export const PostProvider = ({children}) => {
   const [postState, postDispatch] = useReducer(postReducer, initialStatePost)
   const {userState} = useContext(UserContext)
   const {showNotification} = useContext(NotificationContext)
+  
 
   async function loadPosts(){
       try{

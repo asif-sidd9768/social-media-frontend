@@ -1,5 +1,4 @@
 
-import ParticlesBg from 'particles-bg'
 import logoImg from "../../assets/images/logo-new.png"
 import "./LoginPageGraphics.css"
 
@@ -19,11 +18,6 @@ export const LoginPageGraphics = () => {
           <p className='graphics-small-text'>Become a part of greater network within you.</p>
         </div>
       </div>
-      {/* <ParticlesBg type="circle" bg={{
-        position: "relative",
-        top: 0,
-        left: 0
-      }} /> */}
     </div>
   )
 }

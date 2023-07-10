@@ -74,3 +74,7 @@ export const addNewPostAction = (value) => ({
   type:"ADDING_NEW_POST",
   payload:value
 })
+
+export const incrementPageAction = () => ({
+  type:"INCREMENT_PAGE"
+})

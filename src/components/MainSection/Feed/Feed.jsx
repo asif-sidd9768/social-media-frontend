@@ -1,6 +1,7 @@
 import { useContext } from "react"
-import { FeedPost } from "../FeedPost/FeedPost"
+import { PostCardSkeleton } from "../PostCardSkeleton/PostCardSkeleton"
 
+import { FeedPost } from "../FeedPost/FeedPost"
 import { PostContext } from "../../../contexts/PostContext"
 import { PostCard } from "../PostCard/PostCard"
 import { UserContext } from "../../../contexts/UserContext"
@@ -13,7 +14,6 @@ import { UserStories } from "../UserStories/UserStories"
 import { EmptyFeed } from "../EmptyFeed/EmptyFeed"
 
 import "./Feed.css"
-import { PostCardSkeleton } from "../PostCardSkeleton/PostCardSkeleton"
 
 export const Feed = () => {
   const {postState} = useContext(PostContext)

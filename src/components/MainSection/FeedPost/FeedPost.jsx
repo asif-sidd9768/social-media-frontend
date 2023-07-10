@@ -40,6 +40,8 @@ export const FeedPost = () => {
       console.log(error)
       postDispatch(postFailureAction(error))
       showNotification("Failed to upload a post", "error")
+    }finally {
+      postDispatch(addNewPostAction(false))
     }
   }
 

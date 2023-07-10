@@ -1,13 +1,15 @@
 import { useContext, useEffect } from "react"
+
 import { Menu } from "../../components/MainSection/Menu/Menu"
 import { RightSideBar } from "../../components/MainSection/RightSideBar/RightSideBar"
 import { ProfileSection } from "../../components/ProfileSection/ProfileSection"
 import { SideMenuProfile } from "../../components/SideMenuProfile/SideMenuProfile"
-import "./ProfilePage.css"
 import { UserContext } from "../../main"
 import { setProfileUserAction, userStateFailureAction, userStateLoadingAction } from "../../actions/userActions"
 import { getUserService } from "../../services/userService"
 import { useParams } from "react-router-dom"
+
+import "./ProfilePage.css"
 
 export const ProfilePage = () => {
   const {userState, userDispatch} = useContext(UserContext)
@@ -48,32 +50,4 @@ export const ProfilePage = () => {
       </div>
     </div>
   )
-  }
-
-{/* <div className="homepage-main-container main-app-container">
-      <div>
-        <SideMenu/>
-      </div>
-      <div className="app-main-section">
-        <div className="homepage-main">
-          <div className="homepage-menu">
-            <Menu />
-          </div>
-          <div className="homepage-container" >
-            <div className="scroll-test">
-              <MainSection />
-            </div>
-            <div className="homepage-right-bar">
-              <RightSideBar />
-            </div>      
-            <MenuBar />
-            {postState?.addingPost && <PostAdd  />}
-          </div>
-          {userState?.mobileSearch && <div className="search-popup-mobile">
-            <SearchList />
-            </div>}
-          </div>
-        </div>
-    </div> */}
-  // )
-// }
+}

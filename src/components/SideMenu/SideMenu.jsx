@@ -9,10 +9,10 @@ import { EventsTab } from "./EventsTab/EventsTab"
 import { useContext, useEffect, useState } from "react"
 import { getAllEvents } from "../../services/eventService"
 import { UserContext } from "../../main"
-
-import "./SideMenu.css"
 import { SearchList } from "../SearchList/SearchList"
 import { setSearchParamAction } from "../../actions/userActions"
+
+import "./SideMenu.css"
 
 export const SideMenu = () => {
   const [events, setEvents] = useState({eventsData: [], selectedEvent:null})

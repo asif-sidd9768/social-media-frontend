@@ -1,9 +1,7 @@
 import { useContext } from "react"
-import "./RightSideBar.css"
-import { followUserService, unfollowUserService } from "../../../services/userService"
 import { UserContext } from "../../../contexts/UserContext"
-import { followUserAction, unfollowUserAction, userStateFailureAction, userStateLoadingAction } from "../../../actions/userActions"
-import { NotificationContext } from "../../../main"
+
+import "./RightSideBar.css"
 
 export const RightSideBar = () => {
   const { userState, handleFollowUser} = useContext(UserContext)
@@ -31,7 +29,6 @@ export const RightSideBar = () => {
                   {user?.profileImg ? <img className="suggestions-user-profile" src={user?.profileImg} /> : <span className="suggestions-user-profile"><i className="fa-solid fa-circle-user"></i></span>}
                 </span>
                 <span className="suggestions-text">
-                  {/* <p>{user?.firstName} {user?.lastName[0]}</p> */}
                   <p className="suggestion-username">@{user?.username}</p>
                 </span>
               </div>

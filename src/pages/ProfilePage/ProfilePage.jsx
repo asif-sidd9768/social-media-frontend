@@ -41,7 +41,7 @@ export const ProfilePage = () => {
             <Menu />
           </div>
           <div className="profile-container" >
-            <ProfileSection />
+            <ProfileSection  />
             <div className="profile-right-bar">
               <RightSideBar />
             </div>      

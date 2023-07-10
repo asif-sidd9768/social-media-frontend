@@ -19,6 +19,7 @@ export const Feed = () => {
   const {postState} = useContext(PostContext)
   const {userState} = useContext(UserContext)
   const location = useLocation()
+  const profileData = userState?.profileUser?.username === userState?.user?.username ? userState?.user : userState?.profileUser
 
   const getFeeds = () => {
     if(location.pathname.includes("profile")){
@@ -56,7 +57,7 @@ export const Feed = () => {
   return (
     <div className="feed-container">
       {location.pathname.includes("profile") && <div className="side-menu-profile-mobile">
-        <SideMenuProfile />
+        <SideMenuProfile profileData={profileData} />
       </div>}
       <div className="feed-list-container">
         {!location.pathname.includes("profile") && 

@@ -4,9 +4,11 @@ import "./SearchList.css"
 import { UserContext } from "../../main"
 import { UserCard } from "./UserCard/UserCard"
 import { mobileSearchAction, setSearchParamAction } from "../../actions/userActions"
+import { useNavigate } from "react-router-dom"
 
 export const SearchList = () => {
   const { userState, userDispatch } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const handleUserSearch = (event) => {
     userDispatch(setSearchParamAction(event.target.value))
@@ -14,6 +16,12 @@ export const SearchList = () => {
 
   const handleMobileSearch = () => {
     userDispatch(mobileSearchAction(false))
+  }
+
+  const handleUserProfileOpen = (username) => {
+    userDispatch(setSearchParamAction(""))
+    userDispatch(mobileSearchAction(false))
+    navigate(`/profile/${username}`)
   }
 
   const filteredUsers = userState?.allUsers?.filter(({username}) => username?.toLowerCase().includes(userState?.searchParam.toLowerCase()))
@@ -28,7 +36,7 @@ export const SearchList = () => {
         filteredUsers.length > 0 ? <>
           {
             filteredUsers.map(user => 
-              <UserCard key={user.id} {...user} />
+              <div onClick={() => handleUserProfileOpen(user.username)} key={user.id}><UserCard {...user} /></div>
             )
           } 
         </> : <div>

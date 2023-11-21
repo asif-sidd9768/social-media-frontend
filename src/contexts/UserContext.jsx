@@ -4,7 +4,6 @@ import { followUserAction, loginUserAction, postBookmarkAction, setAllUsersActio
 import { followUserService, getAllStoriesService, getAllUsersService, loginUserService, unfollowUserService } from "../services/userService";
 import { bookmarkPostService, removeBookmarkPostService } from "../services/postService";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../utils/isLoggedIn";
 import { NotificationContext } from "./NotificationContext";
 
 export const UserContext = createContext()
